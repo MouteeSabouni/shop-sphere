@@ -142,8 +142,8 @@
 
             <button type="submit" class="w-fit text-center rounded-xl bg-blue-500 text-white px-6 py-2 font-medium">Register</button>
         </div>
-        @if(session('tos'))
-            <span class="text-sm text-red-500 font-medium">{{ session('tos') }}</span>
-        @endif
+        @error('tos')
+            <span class="text-sm text-red-500 font-medium">{{ $message }}</span>
+        @enderror
     </form>
 </div>

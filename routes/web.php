@@ -16,7 +16,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/users/{user}', UpdateProfile::class)->name('profile.edit');
+    Route::get('/user/profile', UpdateProfile::class)->name('profile');
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
