@@ -83,7 +83,7 @@
         </div>
     </form>
 
-    <div class="flex justify-end">
+    <div class="flex justify-end" x-cloak>
         <div x-show = "$wire.showUpdated"
             x-transition.out.opacity.duration.2000ms
             x-effect="if($wire.showUpdated) setTimeout(() => $wire.showUpdated = false, 3000)"

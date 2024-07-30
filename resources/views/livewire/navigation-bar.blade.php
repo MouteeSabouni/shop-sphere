@@ -1,7 +1,7 @@
 <nav>
     <div class="flex items-center justify-between">
         <div>
-            <a href="/">
+            <a wire:navigate.hover href="/">
                 <img src="/images/logo.png" class="w-10 h-10">
             </a>
         </div>

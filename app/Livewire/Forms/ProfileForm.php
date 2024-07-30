@@ -64,7 +64,7 @@ class ProfileForm extends Form
             'password' => $this->password,
         ]);
 
-        Auth::login($user);
+        Auth::login($user, true);
     }
 
     public function update()

@@ -30,10 +30,10 @@
                 ])>
 
                 @error('form.password')
-                    <span class="text-sm text-red-500 font-medium">{{ $message }}</span>
-                @endif
-                @if(session('wrong-credentials'))
-                    <span class="text-sm text-red-500 font-medium">{{ session('wrong-credentials') }}</span>
+                    <span class="text-sm pb-2 text-red-500 font-medium">{{ $message }}</span>
+                @enderror
+                @if(session('login-failed'))
+                    <span class="text-sm text-red-500 font-medium">{{ session('login-failed') }}</span>
                 @endif
 
             </label>

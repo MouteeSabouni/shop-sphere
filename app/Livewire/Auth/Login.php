@@ -13,7 +13,7 @@ class Login extends Component
 
     public function login()
     {
-        $this->form->authenticate();
+        $this->form->login();
     }
 
     public function render()

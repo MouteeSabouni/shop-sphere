@@ -9,6 +9,7 @@
         @vite('resources/css/app.css')
 
         <title>{{ $title ?? 'ShopSphere' }}</title>
+        @livewireStyles
     </head>
     <body>
         <div class="px-8 py-2">

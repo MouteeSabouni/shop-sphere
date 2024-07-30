@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class NavigationBar extends Component
@@ -19,10 +20,14 @@ class NavigationBar extends Component
 
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
 
-        return redirect('/');
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

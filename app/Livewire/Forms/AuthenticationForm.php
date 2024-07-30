@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthenticationForm extends Form
 {
-    #[Validate('required', message: 'You need an email to register')]
+    #[Validate('required', message: 'You can\'t login without an email')]
     #[Validate('email:rfc,dns', message: 'Please enter a valid email address')]
     #[Validate('exists:users', message: 'This email does not match our records')]
     public $email;
@@ -24,17 +26,17 @@ class AuthenticationForm extends Form
         ];
     }
 
-    public function authenticate()
+    public function login()
     {
         $credentials = $this->validate();
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, true)) {
 
             request()->session()->regenerate();
 
             return redirect()->intended('/');
         }
 
-        return back()->with(['wrong-credentials' => 'Credentials do not match our records']);
+        return back()->with(['login-failed' => 'Credentials do not match our records']);
     }
 }
