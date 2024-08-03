@@ -6,7 +6,7 @@
         'text-gray-600': ! $menuItem.isActive,
         'opacity-50 cursor-not-allowed': $menuItem.isDisabled,
     }"
-    class="flex items-center gap-2 w-full py-2 px-3 text-left text-sm hover:bg-slate-50 disabled:text-gray-500 transition-colors"
+    class="flex items-center gap-1 w-full py-2 px-3 text-left text-sm hover:bg-slate-100 disabled:text-gray-500 transition-colors"
     {{ $attributes }}
 >
     {{ $slot }}

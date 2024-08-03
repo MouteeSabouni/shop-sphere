@@ -108,7 +108,7 @@
                             <h2 class="text-2xl font-bold text-slate-900">Terms Of Service</h2>
 
                             <div class="mt-5 text-gray-600">
-                            <h3 class="font-bold text-lg text-slate-800 mt-4">Acceptance of Terms</h3>
+                                <h3 class="font-bold text-lg text-slate-800 mt-4">Acceptance of Terms</h3>
                                 <p class="mt-2">By signing up for and using this sweet app, you agree to be bound by these Terms of Service ("Terms"). If you do not agree with these Terms, please do not use the Service.</p>
 
                                 <h3 class="font-bold text-lg text-slate-800 mt-4">Changes to Terms</h3>

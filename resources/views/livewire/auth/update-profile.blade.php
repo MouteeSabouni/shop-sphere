@@ -78,7 +78,7 @@
 
 
         <div class="flex items-center justify-end pt-4">
-            <a href="/" class="w-fit text-center font-medium px-3">Cancel</a>
+            <a href="javascript:history.back()" class="w-fit text-center font-medium px-3">Cancel</a>
             <button type="submit" class="w-fit text-center rounded-xl bg-blue-500 text-white px-6 py-2 font-medium disabled:cursor-not-allowed disabled:opacity-70">Save</button>
         </div>
     </form>

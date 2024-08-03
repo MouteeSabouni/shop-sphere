@@ -20,6 +20,13 @@ class NavigationBar extends Component
 
     }
 
+    #[On('added-to-cart')]
+    #[On('removed-from-cart')]
+    public function refreshPost()
+    {
+        // ...
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
