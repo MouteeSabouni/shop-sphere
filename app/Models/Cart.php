@@ -10,7 +10,6 @@ class Cart extends Model
     use HasFactory;
 
     protected $guarded = [];
-    public $timestamps = false;
 
     public function user()
     {
@@ -19,6 +18,6 @@ class Cart extends Model
 
     public function sku()
     {
-        return $this->belongsTo(SKU::class);
+        return $this->belongsTo(Sku::class);
     }
 }

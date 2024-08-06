@@ -1,6 +1,8 @@
-<div class="flex items-center gap-1">
-    <img src="/images/gifting-icon.svg" class="w-4 h-4 text-blue-500">
-    <span class="text-xs font-bold pr-0.5">This item is gift eligible</span>
+<div class="flex items-center justify-between">
+    <div class="flex items-center gap-1.5">
+        <img src="/images/gifting-icon.svg" class="w-4 h-4 text-blue-500">
+        <span class="text-xs font-bold">Send as a gift?</span>
+    </div>
     <x-dialog wire:model="showModal">
         <x-dialog.open>
             <button type="button" class="text-xs underline text-gray-500">
@@ -19,12 +21,12 @@
                 <p>• Send a gift message by email (not available for pickup orders).</p>
 
                 <h3 class="font-bold text-lg text-slate-800 mt-4">Does it arrive in a ShopSphere box?</h3>
-                <p class="mt-2">• Gift eligible - items that are shipped will be packaged in a Walmart box when possible.
-                <p>• Gift eligible: original packaging - items cannot be packaged in a Walmart box, which may reveal the contents.</p>
-                <p>• Delivery from store and pickup items will not be packaged in a Walmart box.</p>
+                <p class="mt-2">• Items that are shipped will be packaged in a ShopShpere box when possible.
+                <p>• Original packaging - items cannot be packaged in a ShopShpere box, which may reveal the contents.</p>
+                <p>• Delivery from store and pickup items will not be packaged in a ShopShpere box.</p>
 
                 <h3 class="font-bold text-lg text-slate-800 mt-4">Not eligible for gift treatments</h3>
-                <p class="mt-2">We are not able to apply gift treatments to items that are not shipped and sold by Walmart.</p>
+                <p class="mt-2">We are not able to apply gift treatments to items that are not shipped and sold by ShopShpere.</p>
 
                 <h3 class="font-bold text-lg text-slate-800 mt-4">Here's what to expect</h3>
                 <p class="mt">1. We'll send an email when the gift ships</p>

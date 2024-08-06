@@ -66,4 +66,9 @@ class Sku extends Model
 
         return $rating;
     }
+
+    public function isRated()
+    {
+        return $this->reviews()->count() > 0;
+    }
 }

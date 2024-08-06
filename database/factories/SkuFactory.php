@@ -20,9 +20,12 @@ class SkuFactory extends Factory
         return [
             'product_id' => Product::factory(),
             'code' => fake()->bothify('??##??##'),
-            'price' => fake()->randomFloat(2, 1, 4000),
+            'price' => fake()->randomFloat(2, 1, 5000),
             'quantity' => fake()->numberBetween(2, 100),
-            'images' => ['https://source.unsplash.com/random', 'https://source.unsplash.com/random']
+            'weight' => fake()->randomFloat(2, 1, 10000),
+            'width' => fake()->randomFloat(2, 1, 1000),
+            'height' => fake()->randomFloat(2, 1, 1000),
+            'thickness' => fake()->randomFloat(2, 1, 100),
         ];
     }
 }

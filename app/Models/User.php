@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -42,14 +44,22 @@ class User extends Authenticatable
         ];
     }
 
-    public function fullName(): string
+    public function getSlugOptions() : SlugOptions
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return SlugOptions::create()
+            ->generateSlugsFrom(['first_name', 'last_name'])
+            ->saveSlugsTo('username')
+            ->slugsShouldBeNoLongerThan(50);
     }
 
     public function favoriteProducts(): BelongsToMany
     {
         return $this->belongsToMany(Sku::class, 'favorites');
+    }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 
     public function cart(): HasMany
@@ -60,6 +70,11 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function fullName(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function reviewedSkus()
@@ -96,10 +111,10 @@ class User extends Authenticatable
 
         return $items;
     }
-    public function canAddMore($sku)
+    public function canAddMore($sku, $itemsToAdd = 1)
     {
         $itemsInCart = $this->cart()->where('sku_id', $sku->id)->first()->quantity;
 
-        return $itemsInCart < $sku->quantity ? true : false;
+        return $itemsInCart + $itemsToAdd <= $sku->quantity ? true : false;
     }
 }

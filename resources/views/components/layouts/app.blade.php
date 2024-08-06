@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en" class="scroll-smooth">
     <head>
         <link rel="icon" type="image/jpg" href="/images/logo.png">
         <meta charset="utf-8">
@@ -11,13 +11,15 @@
         <title>{{ $title ?? 'ShopSphere' }}</title>
         @livewireStyles
     </head>
-    <body>
-        <div class="px-8 py-2">
-            <livewire:navigation-bar />
-        </div>
-        <div class="px-8">
+
+    <body class="pt-16">
+        <livewire:nav />
+
+        <div class="px-8 pb-3">
             {{ $slot }}
         </div>
+
+        <livewire:footer />
         @livewireScripts
     </body>
 </html>

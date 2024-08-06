@@ -4,14 +4,14 @@ namespace App\Livewire\Traits;
 
 trait Cartable
 {
-    public function addToCart($skuId)
+    public function addToCart($skuId, $itemsToAdd = 1)
     {
         $user = auth()->user();
         $cartItem = $user->cart()->where('sku_id', $skuId)->first();
 
         if ($cartItem) {
-            $cartItem->quantity += 1;
-            $cartItem->save(['updated_at' => false]);
+            $cartItem->quantity += $itemsToAdd;
+            $cartItem->save();
         } else {
             $user->cart()->create([
                 'sku_id' => $skuId,
@@ -21,17 +21,18 @@ trait Cartable
         $this->dispatch('added-to-cart');
     }
 
-    public function removeFromCart($skuId)
+    public function removeFromCart($skuId, $removeAll = false)
     {
         $user = auth()->user();
         $cartItem = $user->cart()->where('sku_id', $skuId)->first();
 
         if ($cartItem) {
-            if ($cartItem->quantity > 1) {
+            if ($removeAll === true || $cartItem->quantity === 1)
+            {
+                $user->cart()->where('sku_id', $skuId)->first()->delete();
+            } else {
                 $cartItem->quantity -= 1;
                 $cartItem->save();
-            } else {
-                $user->cart()->where('sku_id', $skuId)->first()->delete();
             }
         }
 

@@ -18,7 +18,7 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
+            'name' => ucfirst(fake()->words(2, true)),
             'user_id' => User::factory(),
             'description' => fake()->paragraph(),
             'logo' => 'https://source.unsplash.com/random',

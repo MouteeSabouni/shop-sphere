@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Attributes\Validate;
-use App\Models\User;
 use Livewire\Form;
+use App\Models\User;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 

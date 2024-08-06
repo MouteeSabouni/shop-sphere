@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Livewire\Auth;
+namespace App\Livewire\User;
 
-use Livewire\Component;
-use App\Livewire\FOrms\ProfileForm;
-use Livewire\Attributes\Title;
 use App\Models\User;
+use Livewire\Component;
+use Livewire\Attributes\Title;
+use App\Livewire\FOrms\ProfileForm;
 use Illuminate\Auth\Access\AuthorizationException;
 
 #[Title('ShopSphere — Profile')]
-class UpdateProfile extends Component
+class Profile extends Component
 {
     public ProfileForm $form;
 
@@ -31,6 +31,6 @@ class UpdateProfile extends Component
 
     public function render()
     {
-        return view('livewire.auth.update-profile');
+        return view('livewire.user.profile');
     }
 }

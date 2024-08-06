@@ -6,10 +6,12 @@ use App\Models\Sku;
 use Livewire\Component;
 use App\Models\Product;
 use App\Livewire\Traits\Cartable;
+use App\Livewire\Traits\Scrollable;
+use App\Livewire\Traits\Favoritable;
 
 class Show extends Component
 {
-use Cartable;
+use Cartable, Scrollable, Favoritable;
 
     public Product $product;
     public Sku $sku;
@@ -23,26 +25,6 @@ use Cartable;
     {
         $this->mainImage = $this->sku->images->first()->url;
         $this->images  = $this->sku->images;
-    }
-
-    public function favorite()
-    {
-        auth()->user()->favoriteProducts()->attach($this->sku);
-    }
-
-    public function unfavorite()
-    {
-        auth()->user()->favoriteProducts()->detach($this->sku);
-    }
-
-    public function scrollLeft()
-    {
-        $this->currentIndex--;
-    }
-
-    public function scrollRight()
-    {
-        $this->currentIndex++;
     }
 
     public function setMainImage($imageUrl)

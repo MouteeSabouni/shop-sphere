@@ -1,4 +1,7 @@
 <div>
+    <x-slot:title>
+        ShopSphere — {{ $product->name }}
+    </x-slot:title>
     <div class="my-4 flex flex-col gap-10">
         <div class="flex gap-10">
             <div class="flex flex-col w-[450px]">
@@ -18,7 +21,7 @@
                     </div>
                 @if($visibleCount <= $images->count())
                     <div class="text-center mt-4 space-x-4">
-                        <button wire:click="scrollLeft"
+                        <button wire:click="scrollLeft(1)"
                         @class([
                             'bg-white border border-gray-300 rounded-full p-2 shadow',
                             'opacity-20 cursor-not-allowed' => $currentIndex === 0
@@ -28,7 +31,7 @@
                             <img src="/images/chevron-left.svg" class="h-6 w-6" />
                         </button>
 
-                        <button wire:click="scrollRight"
+                        <button wire:click="scrollRight(1)"
                         @class([
                             'bg-white border border-gray-300 rounded-full p-2 shadow',
                             'opacity-20 cursor-not-allowed' => $currentIndex+$visibleCount === $images->count()
@@ -43,37 +46,32 @@
 
             <div class="w-[450px]">
                 <div class="flex flex-col gap-3">
+                    <div class="text-sm w-fit text-blue-900 bg-blue-100 rounded px-2 font-bold text-xs py-0.5">
+                        Best seller
+                    </div>
+
+                    <a href="" class="text-zinc-500 underline text-sm w-fit">{{ $product->brand->name }}</a>
+
+                    <div class="text-xl font-bold">{{ $product->name }}</div>
+
                     <div class="flex items-center gap-2">
                         @foreach ($product->categories as $category)
-                        <a href="">
+                        <a href="/categories/{{$category->slug}}">
                         <div class="px-2 text-sm rounded-xl border border-black text-blue-700 font-bold hover:bg-gray-300 hover:text-black">
                                 {{ $category->name }}
                             </div>
                         </a>
                         @endforeach
                     </div>
-                    <div class="text-sm w-fit text-blue-900 bg-blue-100 rounded px-2 font-bold text-xs py-0.5">
-                        Best seller
-                    </div>
-                    <a href="" class="text-zinc-500 underline text-sm w-fit">
-                        {{ $product->brand->name }}
-                    </a>
-                    <div class="text-xl font-bold">
-                        {{ $product->name }}
-                    </div>
-                    <div class="flex items-center gap-[0.5px]">
-                        <span class="text-sm">
-                            {{ $sku->rating() }}
-                        </span>
-                        <img src="/star-solid.svg" class="w-4 h-4" />
-                        <a href="#reviews">
-                            <span class="underline text-sm">
-                                ({{ $sku->reviews->count() }} reviews)
-                            </span>
-                        </a>
+
+                    <x-products.rating :$sku />
+
+                    <div class="text-sm">
+                        <span>Added by</span>
+                        <a href="/users/{{ $product->seller->username }}" class="text-sm underline">{{ $product->seller->fullName() }}</a>
                     </div>
 
-                    <hr class="mt-3 mb-2">
+                    <hr class="my-2">
 
                     <div class="text-sm">
                         <span class="text-sm font-bold">
@@ -104,13 +102,13 @@
                         </div>
                     </div>
 
-                    <hr class="mt-3 mb-2">
+                    <hr class="my-2">
 
                     <div>
                         <span class="text-sm font-bold">
                             General specifications
                         </span>
-                        <ul class="text-sm mt-2">
+                        <ul class="text-sm">
                             <li>
                                 <span class="font-bold">Weight: </span>
                                 <span>{{ $sku->weight }} g</span>
@@ -164,32 +162,45 @@
                         </div>
                     </div>
                     @if($sku->cartedBy->pluck('id')->contains(auth()->id()))
-                    <div class="flex justify-between items-center gap-4 bg-blue-600 rounded-full py-1.5 px-1.5">
-                        <button wire:click.throttle="removeFromCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-blue-400 text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-                            </svg>
-                        </button>
+                    <div class="flex justify-between gap-2">
 
-                        <span class="text-white font-medium">
-                            {{ auth()->user()->itemsInCart($sku) }}
-                        </span>
+                        <div class="w-full flex justify-between items-center gap-4 bg-blue-600 rounded-full py-1.5 px-1.5">
+                            <button wire:click.throttle="removeFromCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-blue-400 text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                                </svg>
+                            </button>
 
-                        @if(auth()->user()->canAddMore($sku))
+                            <span class="text-white font-medium">
+                                {{ auth()->user()->itemsInCart($sku) }}
+                            </span>
+
+                            @if(auth()->user()->canAddMore($sku))
                             <button wire:click.throttle="addToCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-blue-400 text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
                             </button>
-                        @else
-                            <button class="px-0.5 py-0.5 rounded-full text-white cursor-not-allowed" disabled>
+                            @else
+                            <button class="px-0.5 py-0.5 rounded-full text-white cursor-not-allowed opacity-50" disabled>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
                             </button>
+                            @endif
+                        </div>
+                        @if(auth()->user()->canAddMore($sku, 10))
+                        <div class="flex bg-blue-600 rounded-full">
+                            <button wire:click.throttle="addToCart({{$sku->id}}, 10)" class="flex items-center px-2 py-1 rounded-full hover:bg-blue-400 text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                                <span>10</span>
+                            </button>
+                        </div>
                         @endif
                     </div>
-                    @else
+                        @else
                         <button wire:click="addToCart({{$sku->id}})">
                             <div class="flex flex-col items-center py-2 bg-blue-600 rounded-full text-white font-bold text-sm">
                                 <div class="flex items-center gap-1">
@@ -204,7 +215,7 @@
 
                     <hr>
 
-                    <x-products.show.gifting />
+                    <x-gifting />
 
                     <hr>
 
@@ -223,29 +234,8 @@
                             </a>
                         </div>
                     </div>
-                    @if($sku->favoritedBy->pluck('id')->contains(auth()->id()))
-                    <button type="button" wire:click="unfavorite">
-                        <div class="flex flex-col items-center py-2 bg-blue-600 rounded-full text-white font-bold text-sm">
-                            <div class="flex gap-1 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-[17px] w-[17px]" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Remove from favorites</span>
-                            </div>
-                        </div>
-                    </button>
-                    @else
-                    <button type="button" wire:click="favorite">
-                        <div class="flex flex-col items-center py-2 bg-blue-600 rounded-full text-white font-bold text-sm">
-                                <div class="flex gap-1 items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-[17px] w-[17px]" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span>Add to favorites</span>
-                                </div>
-                            </div>
-                        </button>
-                    @endif
+
+                    <x-products.show.favorite-button :$sku />
 
                     <hr>
 
@@ -287,61 +277,6 @@
         </div>
     </div>
 
-    <div class="flex flex-col w-full gap-2" id="reviews">
-        <span class="font-bold">
-            Reviews
-        </span>
-        <span class="text-sm">
-            Click on a review to see its details.
-        </span>
-        <div class="grid grid-cols-3 gap-4 py-2">
-            @foreach($sku->reviews as $review)
-                <x-dialog wire:model="showModal">
-                    <x-dialog.open>
-                        <button class="w-full">
-                            <div class="flex flex-col justify-between border border-2 rounded-2xl px-3 py-3 gap-4 h-fit hover:border hover:border-2 hover:border-blue-600 rounded-2xl transition-all duration-300">
-                                <div class="flex justify-between">
-                                    <div class="flex items-center">
-                                        @for ($i = $review->rating; $i > 0; $i--)
-                                            <img src="/star-solid.svg" class="w-3 h-3">
-                                        @endfor
-                                    </div>
-
-                                    <span class="font-medium text-[11px]">
-                                        {{ \Carbon\Carbon::parse($review->created_at)->format('d/m/Y')}}
-                                    </span>
-                                </div>
-                            </div>
-                        </button>
-                    </x-dialog.open>
-
-                    <x-dialog.panel>
-                        <h2 class="text-xl font-bold text-slate-900">{{$review->rating}}-star review</h2>
-
-                        <div class="flex items-center mt-2">
-                            @for ($i = $review->rating; $i > 0; $i--)
-                                <img src="/star-solid.svg" class="w-5 h-5">
-                            @endfor
-                        </div>
-
-                        <div class="mt-5 text-sm text-gray-600">
-                            <h3  class="text-sm">
-                                {{ $review->comment }}
-                            </h3>
-                            <div class="flex gap-1 mt-4">
-                                <span class="text-gray-600 font-medium italic">
-                                    {{ $review->user->fullName() }}
-                                </span>
-                                <span class="italic">on</span>
-                                <span class="text-gray-600 font-medium italic">
-                                    {{ \Carbon\Carbon::parse($review->created_at)->format('d/m/Y')}}
-                                </span>
-                            </div>
-                        </div>
-                    </x-dialog.panel>
-                </x-dialog>
-            @endforeach
-        </div>
-    </div>
+    <x-products.show.reviews :$sku />
 </div>
 

@@ -19,13 +19,21 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+
+        $wordsNumber = rand(4, 12);
+
+        $words = array_map('ucfirst', fake()->words($wordsNumber));
+
+        $name = implode(' ', $words);
+
         return [
             'user_id' => User::factory(),
             'brand_id' => Brand::factory(),
-            'name' => fake()->word(),
-            'slug' => fake()->word(),
+            'name' => $name,
             'description' => fake()->paragraph(),
             'status' => ProductStatus::Active->value,
+            'manufacturer' => fake()->word(),
+            'material' => fake()->word(),
         ];
     }
 }
