@@ -9,14 +9,16 @@ use App\Livewire\Products\Show;
 use App\Livewire\Auth\Register;
 use App\Livewire\User\Favorite;
 use App\Livewire\Products\Index;
-use App\Livewire\Products\Create;
 use App\Livewire\Products\Newest;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Products\IndexByUser;
+use App\Livewire\User\Addresses\Update;
 use App\Livewire\Products\IndexByBrand;
 use App\Livewire\Products\IndexByCategory;
 use App\Http\Controllers\SearchController;
 use App\Http\Middleware\EnsureUserIsSeller;
+use App\Livewire\Products\Create as CreateProduct;
+use App\Livewire\User\Addresses\Create as CreateAddress;
 
 Route::get('/', Home::class)->name('home');
 
@@ -38,7 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/cart', Cart::class)->name('user.cart');
     // Route::get('/user/orders', Orders::class)->name('user.orders');
     Route::get('/user/profile', Profile::class)->name('user.profile');
-    Route::get('/user/favorites', Favorite::class)->name('user.favorites');
-    Route::get('/products/create', Create::class)->name('products.create')->middleware(EnsureUserIsSeller::class);
+    Route::get('/user/favorite', Favorite::class)->name('user.favorite');
+    Route::get('/user/addresses', CreateAddress::class)->name('user.addresses');
+    Route::get('/user/addresses/{address:id}', Update::class)->name('user.addresses.update');
+    Route::get('/products/create', CreateProduct::class)->name('products.create')->middleware('seller');
 });
 

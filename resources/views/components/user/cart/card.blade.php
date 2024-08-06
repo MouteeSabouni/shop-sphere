@@ -9,11 +9,15 @@
             <p class="tracking-tight text-green-600 font-bold text-xl">${{ $sku->price }}</p>
         </div>
 
+        <a href="/brands/{{ $product->brand->slug }}" class="text-sm underline">
+            {{ $product->brand->name }}
+        </a>
+
         @if(count($product->categories) !== 0)
             <div class="flex-none items-center">
                 @foreach($product->categories as $category)
-                    <button class="my-[3px] bg-blue-200 hover:opacity-70 hover:py-2 rounded-xl py-1 font-bold transition-all duration-300 text-[11px]">
-                        <a href="/categories/{{ $category->slug }}" class="px-2">
+                    <button class="my-[3px] bg-blue-200 hover:opacity-70 rounded-xl py-1 font-bold transition-all duration-300 text-[11px]">
+                        <a href="/categories/{{ $category->slug }}" class="px-2.5">
                             {{ $category->name }}
                         </a>
                     </button>

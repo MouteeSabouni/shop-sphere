@@ -22,8 +22,6 @@ class BrandFactory extends Factory
             'user_id' => User::factory(),
             'description' => fake()->paragraph(),
             'logo' => 'https://source.unsplash.com/random',
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }

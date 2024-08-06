@@ -15,7 +15,7 @@ class EnsureUserIsSeller
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(! auth()->user()->is_seller) return redirect('/');
+        if(! auth()->user()->is_seller) return redirect('/become-seller');
         return $next($request);
     }
 }

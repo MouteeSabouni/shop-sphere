@@ -23,6 +23,6 @@
     </div>
 
     <span class="flex justify-end mt-1 font-bold text-base tracking-tight">
-        Total = ${{ auth()->user()->totalInCart() }}
+        Total = ${{ auth()->user()->cartTotal() }}
     </span>
 </div>

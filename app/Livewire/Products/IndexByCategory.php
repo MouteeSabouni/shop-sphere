@@ -17,7 +17,7 @@ class IndexByCategory extends Component
     {
         return view('livewire.products.index', [
             'products' => $this->category->products,
-            'title' => 'ShopSphere — ' . $this->brand->name,
+            'title' => 'ShopSphere — ' . $this->category->name,
         ]);
     }
 }

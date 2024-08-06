@@ -6,7 +6,7 @@
     <form wire:submit="save">
         <div class="flex gap-3 mt-6">
             <label class="flex flex-col gap-2 w-1/2">
-                <span>First name</span>
+                <span class="font-medium">First name</span>
                 <input type="text" wire:model="form.first_name"
                 @class([
                     'px-3 py-2 text-sm rounded-lg' => true,
@@ -19,9 +19,9 @@
             </label>
 
             <label class="flex flex-col gap-2 w-1/2">
-                <span>Last name</span>
+                <span class="font-medium">Last name</span>
                 <input type="text" wire:model="form.last_name" @class([
-                    'px-3 py-2 text-sm border border-slate-300 rounded-lg',
+                    'px-3 py-2 text-sm rounded-lg',
                     'border border-slate-300' => $errors->missing('form.last_name'),
                     'border-2 border-red-500' => $errors->has('form.last_name')
                 ])>
@@ -34,9 +34,9 @@
         <div class="flex gap-3 mt-2">
 
             <label class="flex flex-col gap-2 w-1/2">
-                <span>Email</span>
+                <span class="font-medium">Email</span>
                 <input type="email" wire:model.blur="form.email" @class([
-                    'px-3 py-2 text-sm border border-slate-300 rounded-lg',
+                    'px-3 py-2 text-sm rounded-lg',
                     'border border-slate-300' => $errors->missing('form.email'),
                     'border-2 border-red-500' => $errors->has('form.email')
                 ])>
@@ -46,9 +46,9 @@
             </label>
 
             <label class="flex flex-col gap-2 w-1/2">
-                <span>Username</span>
+                <span class="font-medium">Username</span>
                 <input type="text" wire:model.blur="form.username" @class([
-                    'px-3 py-2 text-sm border border-slate-300 rounded-lg',
+                    'px-3 py-2 text-sm rounded-lg',
                     'border border-slate-300' => $errors->missing('form.username'),
                     'border-2 border-red-500' => $errors->has('form.username')
                 ])>
@@ -78,8 +78,8 @@
 
 
         <div class="flex items-center justify-end pt-4">
-            <a href="javascript:history.back()" class="w-fit text-center font-medium px-3">Cancel</a>
-            <button type="submit" class="w-fit text-center rounded-xl bg-blue-500 text-white px-6 py-2 font-medium disabled:cursor-not-allowed disabled:opacity-70">Save</button>
+            <a href="javascript:history.back()" class="w-fit text-center text-[15px] font-medium px-3">Go back</a>
+            <button type="submit" class="w-fit text-center text-[15px] rounded-xl bg-blue-500 text-white px-4 py-1.5 font-medium disabled:cursor-not-allowed disabled:opacity-70">Save</button>
         </div>
     </form>
 

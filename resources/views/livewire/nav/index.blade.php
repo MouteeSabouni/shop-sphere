@@ -26,7 +26,7 @@
                         </x-nav.link>
                     </div>
                 @else
-                    <x-nav.link wire:navigate.hover href="/become-a-seller" :active="request()->is('become-a-seller')">Become a seller</x-nav.link>
+                    <x-nav.link wire:navigate.hover href="/become-seller" :active="request()->is('become-seller')">Become a seller</x-nav.link>
                 @endif
             @endauth
 

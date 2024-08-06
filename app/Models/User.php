@@ -77,22 +77,25 @@ class User extends Authenticatable
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    public function reviewedSkus()
+    public function ratedSkus()
     {
         return $this->belongsToMany(Sku::class, 'reviews')
                     ->withPivot('review', 'rating')
                     ->withTimestamps();
     }
 
-    public function totalInCart()
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    public function cartTotal()
     {
         $total = 0;
         foreach($this->cart as $item)
         {
             $total += $item->sku->price * $item->quantity;
         }
-
-        $total = number_format($total, 2);
 
         return $total;
     }

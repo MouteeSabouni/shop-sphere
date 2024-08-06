@@ -16,7 +16,7 @@ class Index extends Component
     use Scrollable;
 
     public $currentIndex = 0;
-    public $visibleCount = 30;
+    public $visibleCount = 24;
 
     #[On('profile-updated')]
     public function updateUsername()
@@ -37,7 +37,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.nav.index', [
-            'categories' => Category::all()
+            'categories' => Category::withCount('products')
+                ->orderBy('products_count', 'desc')
+                ->get()
         ]);
     }
 }

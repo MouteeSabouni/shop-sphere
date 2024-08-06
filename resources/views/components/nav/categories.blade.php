@@ -15,18 +15,19 @@
             </svg>
         </button>
         <div x-menu:items x-transition:enter.origin.top.right x-anchor.bottom-start="$refs.button" x-cloak x-collapse.duration.750ms
-            class="w-[600px] bg-white border border-gray-200 rounded-lg shadow-md outline-none mt-8 z-10"
+            class="w-[552px] bg-white border border-gray-200 rounded-lg shadow-md outline-none mt-8 z-10"
         >
-        <div class="grid grid-cols-5 divide-y">
-            @foreach(array_slice($categories->toArray(), $currentIndex, $visibleCount) as $category)
-                <a wire:navigate.hover href="/categories/{{ $category['slug'] }}" x-menu:item class="py-2 px-3 text-left text-sm hover:bg-slate-100 transition-all hover:font-bold">
-                    {{ $category['name'] }}
-                </a>
-            @endforeach
-        </div>
+            <div class="grid grid-cols-3">
+                @foreach(array_slice($categories->toArray(), $currentIndex, $visibleCount) as $category)
+                    <a wire:navigate.hover href="/categories/{{ $category['slug'] }}" x-menu:item class="py-2 px-3 text-left text-sm hover:bg-slate-100 transition-all hover:font-bold">
+                        {{ $category['name'] }}
+                    </a>
+                @endforeach
+            </div>
+
             @if($visibleCount <= $categories->count())
             <div class="text-center mt-3 mb-5 space-x-4">
-                <button wire:click="scrollLeft(30)"
+                <button wire:click="scrollLeft(24)"
                 @class([
                     'bg-white border border-gray-300 rounded-full p-2 shadow',
                     'opacity-20 cursor-not-allowed' => $currentIndex === 0
@@ -36,7 +37,7 @@
                     <img src="/images/chevron-left.svg" class="h-6 w-6" />
                 </button>
 
-                <button wire:click="scrollRight(30)"
+                <button wire:click="scrollRight(24)"
                 @class([
                     'bg-white border border-gray-300 rounded-full p-2 shadow',
                     'opacity-20 cursor-not-allowed' => $currentIndex+$visibleCount >= $categories->count()

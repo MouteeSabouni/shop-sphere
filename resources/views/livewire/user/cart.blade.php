@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="w-1/3 sticky bottom-[22px] self-end">
+            <div class="w-1/3 sticky top-20 self-start">
                 <div class="border border-2 rounded-3xl px-3 py-4">
                     <div class="flex flex-col">
                         <div class="flex flex-col items-center gap-2">
@@ -65,7 +65,7 @@
                         <span>Pay in installments?</span>
                         <div class="flex text-[13px] gap-1">
                             <span>as low as</span>
-                            <span class="font-bold">${{ 30 }}/mo</span>
+                            <span class="font-bold">${{ number_format(auth()->user()->cartTotal()/36, 2) }}/mo</span>
                             <span>with</span>
                             <img src="/images/affirm.png" class="h-[14.5px]">
                         </div>

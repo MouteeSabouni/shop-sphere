@@ -9,16 +9,16 @@
         </a>
     </div>
     <div class="flex justify-between">
-        <div class="grid grid-cols-2">
-            <img src="/images/brands/apple.png" class="object-contain w-32 h-14">
-            <img src="/images/brands/nike.png" class="object-contain w-32 h-14">
-            <img src="/images/brands/adidas.png" class="object-contain w-32 h-14">
-            <img src="/images/brands/dell.png" class="object-contain w-32 h-14">
-            <img src="/images/brands/samsung.png" class="object-contain w-32 h-14">
-            <img src="/images/brands/puma.svg" class="object-contain w-32 h-14">
+        <div class="grid grid-cols-2 w-1/5">
+            <img src="/images/brands/apple.png" class="object-contain w-16 h-16">
+            <img src="/images/brands/nike.png" class="object-contain w-16 h-16">
+            <img src="/images/brands/samsung.png" class="object-contain w-16 h-16">
+            <img src="/images/brands/dell.png" class="object-contain w-16 h-16">
+            <img src="/images/brands/adidas.png" class="object-contain w-16 h-16">
+            <img src="/images/brands/puma.svg" class="object-contain w-16 h-16">
         </div>
-        <div class="flex flex-col w-[150px]">
-            <p class="font-bold mb-8">BY CATEGORY</p>
+        <div class="flex flex-col w-[180px]">
+            <p class="font-bold mb-8">POPULAR CATEGORIES</p>
             <div class="flex flex-col space-y-3">
                 @foreach($categories as $category)
                     <a href="/categories/{{ $category->slug }}" class="text-sm hover:bg-white hover:rounded-full hover:px-2 font-medium hover:text-blue-600 transition-all duration-300">
@@ -41,12 +41,14 @@
             <p class="font-bold mb-8">IN OUR STORE</p>
 
             @foreach($skus as $sku)
-                <a class="hover:text-blue-600 transition-all" href="/products/{{ $sku->product->slug }}/{{ $sku->code }}">
+            <div class="hover:text-blue-600 hover:scale-110 transition-all" >
+                <a href="/products/{{ $sku->product->slug }}/{{ $sku->code }}">
                     {{ $sku->product->name }}
                 </a>
-                <div class="py-2">
-                    <hr>
-                </div>
+            </div>
+            <div class="py-2">
+                <hr>
+            </div>
             @endforeach
         </div>
     </div>
