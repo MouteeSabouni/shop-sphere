@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\ProductStatus;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
@@ -15,13 +14,6 @@ class Product extends Model
     use HasFactory, HasSlug;
 
     protected $guarded = [];
-
-    protected function casts(): array
-    {
-        return [
-            'status' => ProductStatus::class,
-        ];
-    }
 
     public function seller()
     {

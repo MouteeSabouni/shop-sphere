@@ -13,12 +13,7 @@
         </div>
         <div class="flex gap-6 grid grid-cols-5">
             @foreach($skus as $sku)
-                <div class="flex flex-col">
-                    <a wire:navigate.hover href="/products/{{ $sku->product->slug }}/{{ $sku->code }}">
-                        <img src="{{ $sku->images->first()->url }}" class="object-contain w-[200px] h-[200px] rounded-xl hover:animate-pulse">
-                    </a>
-                    <x-user.favorite.card wire:key="{{$sku->id}}" :product="$sku->product" :$sku />
-                </div>
+                <x-user.favorite.card wire:key="{{$sku->id}}" :product="$sku->product" :$sku />
             @endforeach
         </div>
     @else

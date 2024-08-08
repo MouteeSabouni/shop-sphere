@@ -13,13 +13,11 @@
         </div>
         <div class="flex gap-x-4">
             <div class="w-2/3">
-                <x-user.cart.delivery />
-
                 <div class="grid grid-cols-1 gap-6">
                     @foreach($cartItems as $cartItem)
                         <div class="flex items-center border border-2 rounded-3xl">
                             <a wire:navigate.hover href="/products/{{ $cartItem->sku->product->slug }}/{{ $cartItem->sku->code }}">
-                                <img src="{{ $cartItem->sku->images->first()->url }}" class="object-contain px-4 w-[165px] h-[165px] rounded-xl hover:animate-pulse">
+                                <img src="{{ $cartItem->sku->images->first()->url }}" class="object-contain px-4 w-[150px] h-[150px] rounded-xl hover:animate-pulse">
                             </a>
                             <x-user.cart.card wire:key="{{$cartItem->sku->id}}" :sku="$cartItem->sku" :product="$cartItem->sku->product" />
                         </div>
@@ -31,9 +29,11 @@
                 <div class="border border-2 rounded-3xl px-3 py-4">
                     <div class="flex flex-col">
                         <div class="flex flex-col items-center gap-2">
-                            <button class="flex flex-col text-[15px] font-semibold items-center w-3/4 rounded-full hover:bg-blue-400 text-white bg-blue-600 rounded-full py-1.5 px-1.5">
-                                Continue to checkout
-                            </button>
+                            <a href="/user/checkout" class="flex flex-col items-center w-full">
+                                <button class="text-[15px] font-semibold w-3/4 rounded-full hover:bg-blue-400 text-white bg-blue-600 rounded-full py-1.5 px-1.5">
+                                    Continute to checkout
+                                </button>
+                            </a>
                             <span class="text-[13px]">
                                 We hope you had the best shopping experience.
                             </span>
@@ -42,7 +42,7 @@
 
                     <hr class="my-3">
 
-                    <x-user.cart.order-details :$cartItems />
+                    <x-user.cart.details :$cartItems />
 
                     <hr class="my-3">
 

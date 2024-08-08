@@ -67,6 +67,11 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class);
     }
 
+    public function ordereItems(): HasMany
+    {
+        return $this->hasMany(OrderItems::class);
+    }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);
@@ -87,6 +92,11 @@ class User extends Authenticatable
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function cartTotal()

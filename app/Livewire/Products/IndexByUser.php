@@ -16,7 +16,7 @@ class IndexByUser extends Component
     public function render()
     {
         return view('livewire.products.index', [
-            'products' => $this->user->products,
+            'products' => $this->user->products()->paginate(12),
             'title' => 'ShopSphere — ' . $this->user->first_name,
         ]);
     }

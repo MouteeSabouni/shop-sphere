@@ -16,7 +16,7 @@ class IndexByCategory extends Component
     public function render()
     {
         return view('livewire.products.index', [
-            'products' => $this->category->products,
+            'products' => $this->category->products()->paginate(12),
             'title' => 'ShopSphere — ' . $this->category->name,
         ]);
     }

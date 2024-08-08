@@ -2,22 +2,13 @@
 
 namespace App\Livewire\Nav;
 
-use App\Models\Product;
 use Livewire\Component;
-use App\Models\Category;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Url;
 use Illuminate\Http\Request;
-use App\Livewire\Traits\Scrollable;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
-    use Scrollable;
-
-    public $currentIndex = 0;
-    public $visibleCount = 24;
-
     #[On('profile-updated')]
     public function updateUsername()
     {
@@ -36,10 +27,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.nav.index', [
-            'categories' => Category::withCount('products')
-                ->orderBy('products_count', 'desc')
-                ->get()
-        ]);
+        return view('livewire.nav.index');
     }
 }

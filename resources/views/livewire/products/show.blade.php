@@ -52,6 +52,10 @@
 
                     <a href="" class="text-zinc-500 underline text-sm w-fit">{{ $product->brand->name }}</a>
 
+                    @if($sku->status === 0)
+                        <div class="text-red-700 font-medium px-2 py-1 rounded-xl bg-red-100 w-fit">OUT OF STOCK</div>
+                    @endif
+
                     <div class="text-xl font-bold">{{ $product->name }}</div>
 
                     <div class="flex items-center gap-2">
@@ -162,45 +166,45 @@
                         </div>
                     </div>
                     @if($sku->cartedBy->pluck('id')->contains(auth()->id()))
-                    <div class="flex justify-between gap-2">
+                        <div class="flex justify-between gap-2">
+                            <div class="w-full flex justify-between items-center gap-4 bg-blue-600 rounded-full py-1.5 px-1.5">
+                                <button wire:click.throttle="removeFromCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-blue-400 text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                                    </svg>
+                                </button>
 
-                        <div class="w-full flex justify-between items-center gap-4 bg-blue-600 rounded-full py-1.5 px-1.5">
-                            <button wire:click.throttle="removeFromCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-blue-400 text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-                                </svg>
-                            </button>
+                                <span class="text-white font-medium">
+                                    {{ auth()->user()->itemsInCart($sku) }}
+                                </span>
 
-                            <span class="text-white font-medium">
-                                {{ auth()->user()->itemsInCart($sku) }}
-                            </span>
+                                @if(auth()->user()->canAddMore($sku))
+                                    <button wire:click.throttle="addToCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-blue-400 text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                    </button>
+                                @else
+                                    <button class="px-0.5 py-0.5 rounded-full text-white cursor-not-allowed opacity-50" disabled>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                    </button>
+                                @endif
+                            </div>
 
-                            @if(auth()->user()->canAddMore($sku))
-                            <button wire:click.throttle="addToCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-blue-400 text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                            </button>
-                            @else
-                            <button class="px-0.5 py-0.5 rounded-full text-white cursor-not-allowed opacity-50" disabled>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                            </button>
+                            @if(auth()->user()->canAddMore($sku, 10))
+                            <div class="flex bg-blue-600 rounded-full">
+                                <button wire:click.throttle="addToCart({{$sku->id}}, 10)" class="flex items-center px-2 py-1 rounded-full hover:bg-blue-400 text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    <span>10</span>
+                                </button>
+                            </div>
                             @endif
                         </div>
-                        @if(auth()->user()->canAddMore($sku, 10))
-                        <div class="flex bg-blue-600 rounded-full">
-                            <button wire:click.throttle="addToCart({{$sku->id}}, 10)" class="flex items-center px-2 py-1 rounded-full hover:bg-blue-400 text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                                <span>10</span>
-                            </button>
-                        </div>
-                        @endif
-                    </div>
-                        @else
+                    @elseif($sku->status === 1)
                         <button wire:click="addToCart({{$sku->id}})">
                             <div class="flex flex-col items-center py-2 bg-blue-600 rounded-full text-white font-bold text-sm">
                                 <div class="flex items-center gap-1">

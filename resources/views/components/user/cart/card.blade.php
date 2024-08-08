@@ -28,7 +28,7 @@
 
     <div class="flex justify-between items-center">
         <div class="flex gap-2 text-[13px]">
-            Created {{ $sku->cart->where('user_id', auth()->id())->first()->created_at->diffForHumans() }}
+            Added {{ $sku->cart->where('user_id', auth()->id())->first()->created_at->diffForHumans() }}
         </div>
 
         <div class="flex items-center gap-3 justify-end">
@@ -38,9 +38,9 @@
                 </button>
             </div>
 
-            <div class="flex items-center border border-2 border-gray-300 gap-4 rounded-full py-1 px-1.5 scale-90">
+            <div class="flex items-center border border-2 border-gray-300 gap-4 rounded-full py-0.5 px-1.5 scale-90">
                 <button wire:click.throttle="removeFromCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-gray-200 text-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                     </svg>
                 </button>
@@ -51,13 +51,13 @@
 
                 @if(auth()->user()->canAddMore($sku))
                     <button wire:click.throttle="addToCart({{$sku->id}})" class="px-0.5 py-0.5 rounded-full hover:bg-gray-200 text-black">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                     </button>
                 @else
                     <button class="px-0.5 py-0.5 rounded-full text-black cursor-not-allowed opacity-20" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                     </button>

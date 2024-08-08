@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\ProductStatus;
 use App\Models\User;
 use App\Models\Brand;
 
@@ -31,7 +30,6 @@ class ProductFactory extends Factory
             'brand_id' => Brand::factory(),
             'name' => $name,
             'description' => fake()->paragraph(),
-            'status' => ProductStatus::Active->value,
             'manufacturer' => fake()->word(),
             'material' => fake()->word(),
         ];

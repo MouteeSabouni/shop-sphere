@@ -14,24 +14,42 @@
         </div>
     </button>
     <div class="flex items-center gap-2 pb-6" x-show="showOptions" x-transition.duration.750ms>
-        <button class="w-1/3">
-            <div class="flex flex-col py-4 items-center bg-white border border-2 rounded-xl">
+        <button class="w-1/3" wire:click="chooseDelivery('Shipping')"
+            {{ 'Shipping' === $order->delivery_method ? 'disabled' : ''}}
+        >
+            <div @class([
+                'flex flex-col py-4 hover:border-blue-600 items-center bg-white border border-2 rounded-xl transition-all duration-300',
+                'border-blue-600' => 'Shipping' === $order->delivery_method
+                ])
+            >
                 <img src="/images/shipping.png" class="w-12 h-12">
                 <span class="text-[14px]">Shipping</span>
                 <span class="text-[12px]">Arrives in 3-7 days</span>
             </div>
         </button>
 
-        <button class="w-1/3">
-            <div class="flex flex-col py-4 items-center bg-white border border-2 border-blue-600 rounded-xl">
+        <button class="w-1/3" wire:click="chooseDelivery('Pickup')"
+            {{ 'Pickup' === $order->delivery_method ? 'disabled' : ''}}
+        >
+            <div @class([
+                'flex flex-col py-4 hover:border-blue-600 items-center bg-white border border-2 rounded-xl transition-all duration-300',
+                'border-blue-600' => 'Pickup' === $order->delivery_method
+                ])
+            >
                 <img src="/images/pickup.png" class="w-12 h-12">
                 <span class="text-[14px]">Pickup</span>
                 <span class="text-[12px]">Arrives in 2-3 days</span>
             </div>
         </button>
 
-        <button class="w-1/3">
-            <div class="flex flex-col py-4 items-center bg-white border border-2 rounded-xl">
+        <button class="w-1/3" wire:click="chooseDelivery('Home Delivery')"
+            {{ 'Home Delivery' === $order->delivery_method ? 'disabled' : ''}}
+        >
+            <div @class([
+                'flex flex-col py-4 hover:border-blue-600 items-center bg-white border border-2 rounded-xl transition-all duration-300',
+                'border-blue-600' => 'Home Delivery' === $order->delivery_method
+                ])
+            >
                 <img src="/images/delivery.png" class="w-12 h-12">
                 <span class="text-[14px]">Home Delivery</span>
                 <span class="text-[12px]">Arrives tomorrow</span>

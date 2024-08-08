@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire\Traits;
+use App\Models\Sku;
 
 trait Cartable
 {
@@ -13,10 +14,13 @@ trait Cartable
             $cartItem->quantity += $itemsToAdd;
             $cartItem->save();
         } else {
-            $user->cart()->create([
-                'sku_id' => $skuId,
-                'quantity' => 1
-            ]);
+            if(Sku::find($skuId)->status === 1)
+            {
+                $user->cart()->create([
+                    'sku_id' => $skuId,
+                    'quantity' => $itemsToAdd
+                ]);
+            }
         }
         $this->dispatch('added-to-cart');
     }

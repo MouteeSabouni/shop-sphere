@@ -16,7 +16,7 @@ class IndexByBrand extends Component
     public function render()
     {
         return view('livewire.products.index', [
-            'products' => $this->brand->products,
+            'products' => $this->brand->products()->paginate(12),
             'title' => 'ShopSphere — ' . $this->brand->name,
         ]);
     }

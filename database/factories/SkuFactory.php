@@ -26,6 +26,7 @@ class SkuFactory extends Factory
             'width' => fake()->randomFloat(2, 1, 1000),
             'height' => fake()->randomFloat(2, 1, 1000),
             'thickness' => fake()->randomFloat(2, 1, 100),
+            'status' => 1,
         ];
     }
 }

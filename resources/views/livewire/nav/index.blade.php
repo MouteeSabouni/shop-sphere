@@ -1,4 +1,4 @@
-<div class="px-8 py-2 border-b bg-zinc-100 fixed top-0 w-full z-10">
+<div class="px-8 py-1.5 border-b bg-zinc-100 fixed top-0 w-full z-10">
     <nav>
         <div class="flex items-center justify-between">
             <div>
@@ -10,7 +10,7 @@
             <div class="flex items-center space-x-4">
                 <x-nav.link wire:navigate.hover href="/products" :active="request()->is('products')">All Products</x-nav.link>
                 <x-nav.link wire:navigate.hover href="/products/newest" :active="request()->is('products/newest')">New Arrivals</x-nav.link>
-                <x-nav.categories :$categories :$visibleCount :$currentIndex />
+                <livewire:nav.categories />
             </div>
 
             <x-nav.search />

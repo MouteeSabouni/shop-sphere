@@ -20,4 +20,9 @@ class Cart extends Model
     {
         return $this->belongsTo(Sku::class);
     }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
 }
