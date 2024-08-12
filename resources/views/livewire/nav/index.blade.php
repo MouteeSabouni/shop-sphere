@@ -1,10 +1,8 @@
-<div class="px-8 py-1.5 border-b bg-zinc-100 fixed top-0 w-full z-10">
+<div class="px-8 py-1.5 border-b bg-zinc-100 fixed top-0 w-full z-40">
     <nav>
         <div class="flex items-center justify-between">
             <div>
-                <a wire:navigate.hover href="/">
-                    <img src="/images/logo.png" class="w-10 h-10">
-                </a>
+                <a href="/"><img src="/images/logo.png" class="w-10 h-10"></a>
             </div>
 
             <div class="flex items-center space-x-4">

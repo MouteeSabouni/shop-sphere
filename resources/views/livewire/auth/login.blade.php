@@ -1,4 +1,4 @@
-<div class="rounded-xl p-8 flex flex-col gap-6 w-2/3">
+<div class="rounded-xl my-10 mx-20 flex flex-col gap-6 w-2/3">
     <div>
         <h2 class="text-3xl font-bold mb-1">Enter the widest shop sphere!</h2>
         <span class="text-lg pb-2 text-slate-600">Login to your account</span>

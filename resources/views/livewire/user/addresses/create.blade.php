@@ -1,4 +1,4 @@
-<div class="rounded-xl p-8 flex flex-col w-4/5">
+<div class="rounded-xl my-10 mx-20 flex flex-col w-4/5">
     @if(auth()->user()->addresses()->count() > 0)
         <p class="text-3xl font-bold">Manage your addresses!</p>
         <p class="text-xl my-4">Click an address to edit it.</p>

@@ -1,4 +1,4 @@
-<div class="rounded-xl p-8 flex flex-col w-2/3">
+<div class="rounded-xl my-10 mx-20 flex flex-col w-2/3">
     <div class="flex items-center mb-6">
         <h2 class="text-3xl font-bold pr-2">Update your address!</h2>
 

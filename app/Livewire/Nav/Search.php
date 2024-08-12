@@ -4,9 +4,12 @@ namespace App\Livewire\Nav;
 
 use Livewire\Component;
 use App\Models\Product;
+use Livewire\WithPagination;
 
 class Search extends Component
 {
+    use WithPagination;
+
     public function getResults()
     {
         $q = request('q');
@@ -15,13 +18,7 @@ class Search extends Component
             ->orWhere('description', 'like', '%' . $q . '%')
             ->orWhereHas('categories', function($query) use ($q) {
                 $query->where('name', 'like', '%' . $q . '%');
-            })->get();
-            // ->paginate(5);
-
-        if($products->count() === 0)
-        {
-            abort(404);
-        }
+            })->simplePaginate(12);
 
         return $products;
     }

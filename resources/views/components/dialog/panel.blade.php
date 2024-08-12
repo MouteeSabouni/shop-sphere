@@ -3,7 +3,7 @@
         x-dialog
         x-model="dialogOpen"
         style="display: none"
-        class="fixed inset-0 overflow-y-auto z-10 text-left pt-[30%] sm:pt-0"
+        class="fixed z-50 inset-0 overflow-y-auto z-10 text-left pt-[30%] sm:pt-0"
     >
         <!-- Overlay -->
         <div x-dialog:overlay x-transition:enter.opacity class="fixed inset-0 bg-black/25"></div>
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- Panel -->
-                <div class="p-8">
+                <div class="px-8 py-[18px]">
                     {{ $slot }}
                 </div>
             </div>

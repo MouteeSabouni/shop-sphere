@@ -12,7 +12,7 @@
             <p class="tracking-tight text-green-600 font-bold text-2xl">${{ $sku->price }}</p>
             @auth
                 @if($sku->status === 0)
-                    <div class="text-sm bg-gray-200 px-2 py-1 rounded-full font-medium">
+                    <div class="text-sm bg-gray-200 px-3 py-1 rounded-full font-bold">
                         OUT OF STOCK
                     </div>
 

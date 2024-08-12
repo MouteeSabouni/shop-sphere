@@ -1,4 +1,4 @@
-<div>
+<div class="mx-10 my-4">
     <x-slot:title>
         ShopSphere — {{ $product->name }}
     </x-slot:title>
@@ -10,11 +10,11 @@
                         <div class="flex items-center gap-[10px] w-full">
                             @foreach(array_slice($images->toArray(), $currentIndex, $visibleCount) as $image)
                                 <button type="button" wire:click="setMainImage('{{ $image['url'] }}')">
-                                    <img  src="{{ $image['url'] }}"
-                                    @class([
+                                    <img  src="{{ $image['url'] }}" @class([
                                             'w-[140px] transition-all px-1 py-1 h-[140px] object-contain hover:scale-110 hover:opacity-60',
                                             'border border-2 border-blue-500 rounded-xl' => $image['url'] === $mainImage,
-                                        ])>
+                                        ])
+                                    >
                                 </button>
                             @endforeach
                         </div>
@@ -45,20 +45,33 @@
             </div>
 
             <div class="w-[450px]">
-                <div class="flex flex-col gap-3">
-                    <div class="text-sm w-fit text-blue-900 bg-blue-100 rounded px-2 font-bold text-xs py-0.5">
-                        Best seller
+                <div class="flex flex-col">
+                    <div class="flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <div class="text-sm w-fit text-blue-900 bg-blue-100 rounded px-2 font-bold text-xs py-0.5">
+                                Best seller
+                            </div>
+                            <a href="" class="my-1.5 text-gray-500 underline text-sm w-fit">{{ $product->brand->name }}</a>
+                        </div>
+
+                        <div x-cloak x-show="$wire.reviewSubmitted"
+                            x-transition.out.opacity.duration.2000ms
+                            x-effect="if($wire.reviewSubmitted) setTimeout(() => $wire.reviewSubmitted = false, 3000)"
+                            class="flex gap-1 items-center bg-green-500 text-white rounded-full px-4 h-fit py-2 text-sm font-medium">
+                            <span>Product rated!</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
                     </div>
 
-                    <a href="" class="text-zinc-500 underline text-sm w-fit">{{ $product->brand->name }}</a>
-
                     @if($sku->status === 0)
-                        <div class="text-red-700 font-medium px-2 py-1 rounded-xl bg-red-100 w-fit">OUT OF STOCK</div>
+                        <div class="text-red-700 font-bold px-2 py-1 rounded-xl bg-red-100 w-fit">OUT OF STOCK</div>
                     @endif
 
                     <div class="text-xl font-bold">{{ $product->name }}</div>
 
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2 my-2">
                         @foreach ($product->categories as $category)
                         <a href="/categories/{{$category->slug}}">
                         <div class="px-2 text-sm rounded-xl border border-black text-blue-700 font-bold hover:bg-gray-300 hover:text-black">
@@ -70,9 +83,14 @@
 
                     <x-products.rating :$sku />
 
-                    <div class="text-sm">
-                        <span>Added by</span>
-                        <a href="/users/{{ $product->seller->username }}" class="text-sm underline">{{ $product->seller->fullName() }}</a>
+                    <div class="flex justify-between items-end">
+                        <div class="text-sm">
+                            <span>Added by</span>
+                            <a href="/users/{{ $product->seller->username }}" class="text-gray-500 text-sm underline">{{ $product->seller->fullName() }}</a>
+                        </div>
+                        @if(auth()->user()->hasOrdered($sku->id) && !auth()->user()->hasRated($sku->id))
+                            <x-products.show.rate :$sku :$rating />
+                        @endif
                     </div>
 
                     <hr class="my-2">

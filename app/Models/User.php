@@ -5,6 +5,7 @@ namespace App\Models;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -72,21 +73,14 @@ class User extends Authenticatable
         return $this->hasMany(OrderItems::class);
     }
 
-    public function reviews()
+    public function reviews(): hasMany
     {
         return $this->hasMany(Review::class);
     }
 
-    public function fullName(): string
+    public function testimony(): hasOne
     {
-        return $this->first_name . ' ' . $this->last_name;
-    }
-
-    public function ratedSkus()
-    {
-        return $this->belongsToMany(Sku::class, 'reviews')
-                    ->withPivot('review', 'rating')
-                    ->withTimestamps();
+        return $this->hasOne(Testimony::class);
     }
 
     public function addresses(): HasMany
@@ -97,6 +91,16 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function sellerRequest(): HasOne
+    {
+        return $this->hasOne(SellerRequest::class);
+    }
+
+    public function fullName(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function cartTotal()
@@ -129,5 +133,18 @@ class User extends Authenticatable
         $itemsInCart = $this->cart()->where('sku_id', $sku->id)->first()->quantity;
 
         return $itemsInCart + $itemsToAdd <= $sku->quantity ? true : false;
+    }
+
+    public function hasRated($skuId)
+    {
+        return $this->reviews()->pluck('sku_id')->contains($skuId) ? true : false;
+    }
+
+    public function hasOrdered($skuId)
+    {
+        return $this->orders()->where('status', 'Delivered')
+        ->whereHas('items', function ($query) use ($skuId) {
+            $query->where('sku_id', $skuId);
+        })->exists();
     }
 }

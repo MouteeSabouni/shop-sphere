@@ -1,7 +1,10 @@
 <div class="flex items-center mt-1 border border-2 rounded-xl">
     <div class="contents gap-1">
         @foreach($order->items as $item)
-                <img src="{{ $item->sku->images->first()->url }}" class="object-contain px-4 w-[90px] h-[90px]">
+                <img src="{{ $item->sku->images->first()->url }}" @class([
+                    'object-contain px-4 w-[90px] h-[90px]',
+                    'opacity-50' => $item->sku->status === 0
+                    ])>
             @if($loop->iteration === 2) @break @endif
         @endforeach
     </div>

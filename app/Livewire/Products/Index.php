@@ -7,7 +7,9 @@ use App\Models\Product;
 use App\Livewire\Traits\Cartable;
 use App\Livewire\Traits\Favoritable;
 use Livewire\WithPagination;
+use Livewire\Attributes\Lazy;
 
+#[Lazy]
 class Index extends Component
 {
     use Cartable, Favoritable, WithPagination;
@@ -15,8 +17,13 @@ class Index extends Component
     public function render()
     {
         return view('livewire.products.index', [
-            'products' => Product::paginate(2),
+            'products' => Product::simplePaginate(12),
             'title' => 'ShopeSphere — All'
         ]);
+    }
+
+    public function placeholder()
+    {
+        return view('livewire.products.placeholder');
     }
 }

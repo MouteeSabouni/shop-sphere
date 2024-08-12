@@ -1,4 +1,4 @@
-<div class="my-[10px] mx-16">
+<div class="my-[10px] mx-20">
     <x-slot:title>
         {{ $title }}
     </x-slot:title>

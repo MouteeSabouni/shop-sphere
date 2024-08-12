@@ -1,4 +1,4 @@
-<div class="flex mt-6 mb-4 space-x-4">
+<div class="flex my-10 mx-20 space-x-4">
     <div class="w-1/2 flex flex-col">
         <x-user.checkout.delivery :$order />
 

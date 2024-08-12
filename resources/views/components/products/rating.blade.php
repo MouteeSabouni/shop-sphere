@@ -4,7 +4,7 @@
             {{ $sku->rating()}}
         </span>
         <img class="w-[18px] h-[18px]" src="/star-solid.svg" />
-        <a class="underline" href="/products/{{ $sku->product->slug }}/{{ $sku->code }}/#reviews">
+        <a class="text-gray-500 underline" href="/products/{{ $sku->product->slug }}/{{ $sku->code }}/#reviews">
             ({{$sku->reviews->count()}} reviews)
         </a>
     </div>
