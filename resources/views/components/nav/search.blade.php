@@ -4,6 +4,6 @@
     </div>
     <form action="/products/search">
 
-        <input name="q" type="text" placeholder="Search everything on ShopSphere..." class="group block w-[25rem] rounded-lg border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        <input name="q" type="search" placeholder="Search everything on ShopSphere..." class="group block w-[25rem] rounded-lg border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
     </form>
 </div>

@@ -19,7 +19,7 @@
         >
             <div class="grid grid-cols-3">
                 @foreach(array_slice($categories->toArray(), $currentIndex, $visibleCount) as $category)
-                    <a wire:navigate.hover href="/categories/{{ $category['slug'] }}" x-menu:item class="py-2 px-3 text-left text-sm hover:bg-slate-100 transition-all hover:font-bold">
+                    <a wire:navigate.hover href="/categories/{{ $category['slug'] }}" x-menu:item class="py-2 px-3 text-left text-sm hover:bg-slate-100 transition-all">
                         {{ $category['name'] }}
                     </a>
                 @endforeach

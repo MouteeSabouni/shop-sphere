@@ -23,7 +23,6 @@ class Home extends Component
 
     public $reviewSubmitted = false;
 
-    public $users;
     public $testimonies;
     public $electronicsProducts;
     public $wearingProducts;
@@ -43,8 +42,6 @@ class Home extends Component
     public function render()
     {
         $this->testimonies = Testimony::latest()->with('user')->get();
-
-        $this->users = $this->testimonies->pluck('user');
 
         $this->electronicsProducts = Product::whereHas('categories', function ($query) {
             $query->where('slug', 'electronics');
@@ -67,9 +64,6 @@ class Home extends Component
             return $sku->rating();
         });
 
-        return view('livewire.home', [
-            'testimonies' => $this->testimonies->toArray(),
-            'users' => $this->users->toArray(),
-        ]);
+        return view('livewire.home', ['title' => 'ShopSphere — Home']);
     }
 }

@@ -6,12 +6,19 @@
             </div>
 
             <div class="flex items-center space-x-4">
-                <x-nav.link wire:navigate.hover href="/products" :active="request()->is('products')">All Products</x-nav.link>
+                <x-nav.link href="/products" :active="request()->is('products')">All Products</x-nav.link>
                 <x-nav.link wire:navigate.hover href="/products/newest" :active="request()->is('products/newest')">New Arrivals</x-nav.link>
                 <livewire:nav.categories />
             </div>
 
             <x-nav.search />
+
+            @guest
+                <div class="flex items-center justify-between space-x-3">
+                    <x-nav.link wire:navigate.hover href="/register" :active="request()->is('register')">Register</x-nav.link>
+                    <x-nav.link wire:navigate.hover href="/login" :active="request()->is('login')">Log In</x-nav.link>
+                </div>
+            @endguest
 
             @auth
                 @if(auth()->user()->is_seller)
@@ -26,23 +33,13 @@
                 @else
                     <x-nav.link wire:navigate.hover href="/become-seller" :active="request()->is('become-seller')">Become a seller</x-nav.link>
                 @endif
+
+                <div class="flex items-center gap-3">
+                    <x-nav.user-options />
+
+                    <livewire:nav.cart />
+                </div>
             @endauth
-
-            <div class="flex items-center space-x-3">
-                @guest
-                    <x-nav.link wire:navigate.hover href="/register" :active="request()->is('register')">Register</x-nav.link>
-                    <x-nav.link wire:navigate.hover href="/login" :active="request()->is('login')">Log In</x-nav.link>
-                @endguest
-
-                @auth
-                    <div class="flex items-center gap-3">
-                        <x-nav.user-options />
-
-                        <livewire:nav.cart />
-                    </div>
-                @endauth
-            </div>
-
         </div>
     </nav>
 </div>

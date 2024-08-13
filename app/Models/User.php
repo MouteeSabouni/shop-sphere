@@ -47,10 +47,11 @@ class User extends Authenticatable
 
     public function getSlugOptions() : SlugOptions
     {
-        return SlugOptions::create()
+            return SlugOptions::create()
             ->generateSlugsFrom(['first_name', 'last_name'])
             ->saveSlugsTo('username')
-            ->slugsShouldBeNoLongerThan(50);
+            ->slugsShouldBeNoLongerThan(50)
+            ->doNotGenerateSlugsOnUpdate();
     }
 
     public function favoriteProducts(): BelongsToMany

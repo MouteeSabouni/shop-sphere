@@ -4,8 +4,8 @@
     'opacity-50' => $sku->status === 0
     ])
 >
-    <a href="/products/{{ $product->slug }}/{{ $product->skus->first()->code }}">
-        <img src="{{ $product->skus->first()->images->first()->url }}" class="object-contain w-[325px] h-[325px] rounded-xl hover:animate-pulse">
+    <a href="/products/{{ $product->slug }}/{{ $sku->code }}">
+        <img src="{{ $sku->images->first()->url }}" class="object-contain w-[325px] h-[325px] rounded-xl hover:animate-pulse">
     </a>
     <div class="p-4 rounded-xl">
         <div class="flex items-center justify-between">

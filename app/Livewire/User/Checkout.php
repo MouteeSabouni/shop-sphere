@@ -129,6 +129,8 @@ class Checkout extends Component
     {
         $this->saveOrderDetails();
 
-        return view('livewire.user.checkout');
+        return view('livewire.user.checkout', [
+            'title' => 'ShopSphere — Checkout',
+        ]);
     }
 }

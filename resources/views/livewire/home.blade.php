@@ -5,7 +5,7 @@
 
     <x-home.categorized-products :$electronicsProducts :$wearingProducts />
 
-    <x-home.user-testimonials :$testimonies :$users />
+    <x-home.user-testimonials :$testimonies />
 
     <x-home.contact />
 </div>
