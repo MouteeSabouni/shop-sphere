@@ -1,6 +1,6 @@
 # Shop Sphere
 
-**Shop Sphere** is an online e-commerce website built to deliver a smooth and modern shopping experience. The platform is developed using Laravel and Tailwind CSS, offering a responsive interface with several advanced features.
+**Shop Sphere** is an online e-commerce website built to deliver a smooth and modern shopping experience. The platform is developed using Laravel, Livewire, JS, and Tailwind CSS, offering a responsive interface with several advanced features.
 
 ## Features
 
