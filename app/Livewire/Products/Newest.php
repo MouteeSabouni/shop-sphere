@@ -4,11 +4,14 @@ namespace App\Livewire\Products;
 
 use App\Models\Sku;
 use Livewire\Component;
-use App\Livewire\Forms\Filter;
+use Livewire\WithPagination;
+use App\Livewire\Traits\Cartable;
+use App\Livewire\Traits\Filterable;
+use App\Livewire\Traits\Favoritable;
 
 class Newest extends Component
 {
-    public Filter $filter;
+    use Cartable, Favoritable, WithPagination, Filterable;
 
     public $skusIds;
 
@@ -17,21 +20,10 @@ class Newest extends Component
         $this->skusIds = Sku::latest()->pluck('id');
     }
 
-    public function clearFilter()
-    {
-        $this->filter->clear();
-    }
-
     public function render()
     {
         return view('livewire.products.index', [
-            'skus' => Sku::with([
-                'favoritedBy', 'cartedBy', 'images', 'product.seller', 'product.brand', 'product.categories'
-                ])->withSum('reviews', 'rating')
-                ->withCount('reviews')
-                ->whereIn('id', $this->skusIds)->tap(function ($query) {
-                    $this->filter->apply($query);
-                })->simplePaginate(12),
+            'skus' => $this->getSkus($this->skusIds),
             'title' => 'ShopSphere — Newest'
         ]);
     }

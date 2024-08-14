@@ -6,17 +6,15 @@ use App\Models\Sku;
 use App\Models\Brand;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Livewire\Forms\Filter;
 use App\Livewire\Traits\Cartable;
+use App\Livewire\Traits\Filterable;
 use App\Livewire\Traits\Favoritable;
 
 class IndexByBrand extends Component
 {
-    use Cartable, Favoritable, WithPagination;
+    use Cartable, Favoritable, WithPagination, Filterable;
 
     public Brand $brand;
-
-    public Filter $filter;
 
     public $skusIds;
 
@@ -30,21 +28,10 @@ class IndexByBrand extends Component
         })->pluck('id');
     }
 
-    public function clearFilter()
-    {
-        $this->filter->clear();
-    }
-
     public function render()
     {
         return view('livewire.products.index', [
-            'skus' => Sku::with([
-                'favoritedBy', 'cartedBy', 'images', 'product.seller', 'product.brand', 'product.categories'
-                ])->withSum('reviews', 'rating')
-                ->withCount('reviews')
-                ->whereIn('id', $this->skusIds)->tap(function ($query) {
-                    $this->filter->apply($query);
-                })->simplePaginate(12),
+            'skus' => $this->getSkus($this->skusIds),
             'title' => 'ShopSphere — ' . $this->brand->name,
         ]);
     }

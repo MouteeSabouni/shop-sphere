@@ -5,20 +5,15 @@ namespace App\Livewire\Nav;
 use App\Models\Sku;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Livewire\Forms\Filter;
+use App\Livewire\Traits\Filterable;
+use App\Livewire\Traits\Cartable;
+use App\Livewire\Traits\Favoritable;
 
 class Search extends Component
 {
-    use WithPagination;
-
-    public Filter $filter;
+    use Cartable, Favoritable, WithPagination, Filterable;
 
     public $skusIds;
-
-    public function clearFilter()
-    {
-        $this->filter->clear();
-    }
 
     public function mount()
     {
@@ -29,6 +24,9 @@ class Search extends Component
             ->orWhere('description', 'like', '%' . $q . '%')
             ->orWhereHas('categories', function($query) use ($q) {
                 $query->where('name', 'like', '%' . $q . '%');
+            })
+            ->orWhereHas('brand', function($query) use ($q) {
+                $query->where('name', 'like', '%' . $q . '%');
             });
         })->pluck('id');
     }
@@ -36,9 +34,7 @@ class Search extends Component
     public function render()
     {
         return view('livewire.products.index', [
-            'skus' => Sku::whereIn('id', $this->skusIds)->tap(function ($query) {
-                $this->filter->apply($query);
-            })->simplePaginate(12),
+            'skus' => $this->getSkus($this->skusIds),
             'title' => 'ShopSPhere — Search'
         ]);
     }

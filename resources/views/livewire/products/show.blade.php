@@ -219,19 +219,19 @@
 
                     <div class="flex items-center gap-2">
                         <div class="w-1/3 flex flex-col py-2 px-2 items-center bg-white border border-black rounded-xl">
-                            <img src="/images/shipping.png" class="w-10 h-10">
+                            <img src="/images/delivery/shipping.png" class="w-10 h-10">
                             <span class="text-[12px]">Shipping</span>
                             <span class="text-[10px]">Arrives in 3-7 days</span>
                         </div>
 
                         <div class="w-1/3 flex flex-col py-2 px-2 items-center bg-white border border-black rounded-xl">
-                            <img src="/images/pickup.png" class="w-10 h-10">
+                            <img src="/images/delivery/pickup.png" class="w-10 h-10">
                             <span class="text-[12px]">Pickup</span>
                             <span class="text-[10px]">Arrives in 2-3 days</span>
                         </div>
 
                         <div class="w-1/3 flex flex-col py-2 px-2 items-center bg-white border border-black rounded-xl">
-                            <img src="/images/delivery.png" class="w-10 h-10">
+                            <img src="/images/delivery/delivery.png" class="w-10 h-10">
                             <span class="text-[12px]">Home Delivery</span>
                             <span class="text-[10px]">Arrives tomorrow</span>
                         </div>

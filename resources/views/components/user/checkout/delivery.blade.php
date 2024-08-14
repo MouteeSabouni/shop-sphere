@@ -22,7 +22,7 @@
                 'border-blue-600' => 'Shipping' === $order->delivery_method
                 ])
             >
-                <img src="/images/shipping.png" class="w-12 h-12">
+                <img src="/images/delivery/shipping.png" class="w-12 h-12">
                 <span class="text-[14px]">Shipping</span>
                 <span class="text-[12px]">Arrives in 3-7 days</span>
             </div>
@@ -36,7 +36,7 @@
                 'border-blue-600' => 'Pickup' === $order->delivery_method
                 ])
             >
-                <img src="/images/pickup.png" class="w-12 h-12">
+                <img src="/images/delivery/pickup.png" class="w-12 h-12">
                 <span class="text-[14px]">Pickup</span>
                 <span class="text-[12px]">Arrives in 2-3 days</span>
             </div>
@@ -50,7 +50,7 @@
                 'border-blue-600' => 'Home Delivery' === $order->delivery_method
                 ])
             >
-                <img src="/images/delivery.png" class="w-12 h-12">
+                <img src="/images/delivery/delivery.png" class="w-12 h-12">
                 <span class="text-[14px]">Home Delivery</span>
                 <span class="text-[12px]">Arrives tomorrow</span>
             </div>

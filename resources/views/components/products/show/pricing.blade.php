@@ -1,7 +1,7 @@
 <x-dialog wire:model="showModal">
     <x-dialog.open>
         <button type="button">
-            <img src="/images/info.svg" class="h-4 w-4">
+            <img src="/images/button-icons/info.svg" class="h-4 w-4">
         </button>
     </x-dialog.open>
 

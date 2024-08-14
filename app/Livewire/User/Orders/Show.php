@@ -11,7 +11,7 @@ class Show extends Component
 
     public function mount()
     {
-        if(!$this->order->user_id === auth()->id())
+        if($this->order->user_id !== auth()->id())
         {
             return redirect('/user/orders');
         }

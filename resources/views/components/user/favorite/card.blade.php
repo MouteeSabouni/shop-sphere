@@ -66,7 +66,7 @@
 
                 <div>
                     <button type="button" class="w-full" wire:click="unfavorite({{$sku->id}})" wire:confirm="Remove this item from favorite?">
-                        <img src="/images/trash.svg" class="w-5 h-5" alt="Remove from favorite">
+                        <img src="/images/button-icons/trash.svg" class="w-5 h-5" alt="Remove from favorite">
                     </button>
                 </div>
             </div>
