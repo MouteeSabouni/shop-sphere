@@ -11,15 +11,15 @@
     </div>
 
     <div class="flex items-center rounded-2xl space-x-4">
-        @foreach($electronicsProducts as $product)
-            <a href="/products/{{$product->slug}}/{{$product->skus()->first()->code}}">
+        @foreach($electronicsSkus as $sku)
+            <a href="/products/{{$sku->product->slug}}/{{$sku->code}}">
                 <div class="relative border py-2 rounded-xl px-4 flex flex-col hover:scale-[1.05] hover:opacity-60 transition-all">
-                    <img src="{{$product->skus()->first()->images()->first()->url}}" class="object-contain w-[275px] h-[275px]">
+                    <img src="{{$sku->images->first()->url}}" class="object-contain w-[275px] h-[275px]">
                     <div class="text-xl font-bold">
-                        ${{ $product->skus()->first()->price }}
+                        ${{ $sku->price }}
                     </div>
                     <div>
-                        {{ str($product->name)->limit(30) }}
+                        {{ str($sku->product->name)->limit(30) }}
                     </div>
                 </div>
             </a>
@@ -34,15 +34,15 @@
     </div>
 
     <div class="flex items-center space-x-4 mb-8">
-        @foreach($wearingProducts as $product)
-            <a href="/products/{{$product->slug}}/{{$product->skus()->first()->code}}">
+        @foreach($wearingSkus as $sku)
+            <a href="/products/{{$sku->product->slug}}/{{$sku->code}}">
                 <div class="relative border py-2 rounded-xl px-4 flex flex-col hover:scale-[1.05] hover:opacity-60 transition-all">
-                    <img src="{{$product->skus()->first()->images()->first()->url}}" class="object-contain w-[275px] h-[275px]">
+                    <img src="{{$sku->images->first()->url}}" class="object-contain w-[275px] h-[275px]">
                     <div class="text-xl font-bold">
-                        ${{ $product->skus()->first()->price }}
+                        ${{ $sku->price }}
                     </div>
                     <div>
-                        {{ str($product->name)->limit(30) }}
+                        {{ str($sku->product->name)->limit(30) }}
                     </div>
                 </div>
             </a>

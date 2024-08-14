@@ -80,15 +80,17 @@
             <div class="flex justify-between mt-2">
                 <x-products.rating :$sku />
 
-                @if($sku->favoritedBy->pluck('id')->contains(auth()->id()))
-                    <button type="button" wire:click="unfavorite({{$sku->id}})" class="hover:scale-[1.35]">
-                        <img src="/images/unfavorite.svg" class="h-6 w-6">
-                    </button>
-                @else
-                    <button type="button" wire:click="favorite({{$sku->id}})" class="hover:scale-[1.35]">
-                        <img src="/images/favorite.svg" class="h-6 w-6">
-                    </button>
-                @endif
+                @auth
+                    @if($sku->favoritedBy->pluck('id')->contains(auth()->id()))
+                        <button type="button" wire:click="unfavorite({{$sku->id}})" class="hover:scale-[1.35]">
+                            <img src="/images/unfavorite.svg" class="h-6 w-6">
+                        </button>
+                    @else
+                        <button type="button" wire:click="favorite({{$sku->id}})" class="hover:scale-[1.35]">
+                            <img src="/images/favorite.svg" class="h-6 w-6">
+                        </button>
+                    @endif
+                @endauth
             </div>
 
             <div class="flex gap-1 text-[13px]">

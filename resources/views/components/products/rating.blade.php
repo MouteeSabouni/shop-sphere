@@ -1,11 +1,11 @@
 @if($sku->isRated())
     <div class="flex items-center text-sm">
         <span class="text-sm">
-            {{ $sku->rating()}}
+            {{ number_format($sku->reviews_sum_rating/$sku->reviews_count, 1) }}
         </span>
         <img class="w-[18px] h-[18px]" src="/star-solid.svg" />
         <a class="text-gray-500 underline" href="/products/{{ $sku->product->slug }}/{{ $sku->code }}/#reviews">
-            ({{$sku->reviews->count()}} reviews)
+            ({{ $sku->reviews_count }} reviews)
         </a>
     </div>
 @else

@@ -58,17 +58,16 @@ class Sku extends Model
 
     public function rating()
     {
-        $total = $this->reviews()->sum('rating');
+        $total = $this->reviews()->selectRaw('SUM(rating) as total, COUNT(*) as count')->first();
+        $rating = 0;
 
-        $rating = $total/$this->reviews()->count();
+        if ($total && $total->count > 0) $rating = $total->total / $total->count;
 
-        $rating = number_format($rating, 1);
-
-        return $rating;
+        return number_format($rating, 1);
     }
 
     public function isRated()
     {
-        return $this->reviews()->count() > 0;
+        return $this->reviews_count > 0;
     }
 }

@@ -15,7 +15,7 @@ class Footer extends Component
 
     public function mount()
     {
-        $this->skus = Sku::latest()->limit(3)->get();
+        $this->skus = Sku::latest()->with('product')->limit(3)->get();
 
         $this->categories = Category::withCount('products')
             ->orderBy('products_count', 'desc')

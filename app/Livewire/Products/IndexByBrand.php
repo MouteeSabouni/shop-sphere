@@ -38,9 +38,13 @@ class IndexByBrand extends Component
     public function render()
     {
         return view('livewire.products.index', [
-            'skus' => Sku::whereIn('id', $this->skusIds)->tap(function ($query) {
-                $this->filter->apply($query);
-            })->simplePaginate(12),
+            'skus' => Sku::with([
+                'favoritedBy', 'cartedBy', 'images', 'product.seller', 'product.brand', 'product.categories'
+                ])->withSum('reviews', 'rating')
+                ->withCount('reviews')
+                ->whereIn('id', $this->skusIds)->tap(function ($query) {
+                    $this->filter->apply($query);
+                })->simplePaginate(12),
             'title' => 'ShopSphere — ' . $this->brand->name,
         ]);
     }

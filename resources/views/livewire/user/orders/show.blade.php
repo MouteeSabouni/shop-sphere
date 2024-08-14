@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex gap-1.5">
-        <div class="text-xl font-bold">Order #{{$order->id}} — {{$orderItems->count()}} item(s)</div>
+        <div class="text-xl font-bold">Order #{{$order->id}} — {{$order->items_count}} item(s)</div>
 
         <x-user.orders.status :$order />
     </div>

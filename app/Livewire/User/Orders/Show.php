@@ -21,8 +21,10 @@ class Show extends Component
     {
         return view('livewire.user.orders.show', [
             'title' => 'ShopSphere — Order #' . $this->order->id,
-            'order' => $this->order,
-            'orderItems' => $this->order->items
+            'order' => $this->order->withCount('items'),
+            'orderItems' => $this->order->items()
+            ->with('sku.images', 'sku.product.seller', 'sku.product.brand')
+            ->get()
         ]);
     }
 }

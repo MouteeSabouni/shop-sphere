@@ -3,7 +3,7 @@
 
     <x-home.top-rated-products :$topRatedSkus />
 
-    <x-home.categorized-products :$electronicsProducts :$wearingProducts />
+    <x-home.categorized-products :$electronicsSkus :$wearingSkus />
 
     <x-home.user-testimonials :$testimonies />
 
