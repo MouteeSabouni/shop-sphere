@@ -9,16 +9,10 @@ class Show extends Component
 {
     public Order $order;
 
-    public function mount()
-    {
-        if($this->order->user_id !== auth()->id())
-        {
-            return redirect('/user/orders');
-        }
-    }
-
     public function render()
     {
+        if($this->order->user_id !== auth()->id()) $this->redirect('/user/orders');
+
         return view('livewire.user.orders.show', [
             'title' => 'ShopSphere — Order #' . $this->order->id,
             'order' => $this->order->withCount('items'),

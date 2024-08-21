@@ -17,13 +17,13 @@ class Newest extends Component
 
     public function mount()
     {
-        $this->skusIds = Sku::latest()->pluck('id');
+        $this->skusIds = Sku::all()->pluck('id');
     }
 
     public function render()
     {
         return view('livewire.products.index', [
-            'skus' => $this->getSkus($this->skusIds),
+            'skus' => $this->getLatestSkus($this->skusIds),
             'title' => 'ShopSphere — Newest'
         ]);
     }

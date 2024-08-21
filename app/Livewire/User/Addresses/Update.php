@@ -33,12 +33,7 @@ class Update extends Component
             'address_line' => 'required|string'
         ]);
 
-        $this->address->update([
-            'name' => $this->name,
-            'city' => $this->city,
-            'district' => $this->district,
-            'address_line' => $this->address_line,
-        ]);
+        $this->address->update($validated);
 
         $this->showUpdated = true;
     }
@@ -52,6 +47,8 @@ class Update extends Component
 
     public function render()
     {
+        if($this->address->user_id !== auth()->id()) $this->redirect('/user/addresses');
+
         return view('livewire.user.addresses.update');
     }
 }

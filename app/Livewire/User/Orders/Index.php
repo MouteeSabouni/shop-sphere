@@ -43,7 +43,7 @@ class Index extends Component
         return view('livewire.user.orders.index', [
             'title' => 'ShopSphere — Orders',
             'orders' => Order::where('status', '!=', 'draft')
-            ->with('items.sku.images')
+            ->with('items.sku.images', 'address')
             ->where('user_id', auth()->id())
             ->latest()
             ->get(),

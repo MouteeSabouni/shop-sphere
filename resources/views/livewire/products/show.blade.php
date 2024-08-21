@@ -97,24 +97,32 @@
 
                     <hr class="my-2">
 
-                    <div class="text-sm">
-                        <span class="text-sm font-bold">
+                    <div>
+                        <span class="font-bold">
                             At a glance
                         </span>
-                        <div class="grid grid-cols-3 gap-3 mt-3">
+                        <div class="grid grid-cols-3 gap-3 mt-3 text-xs">
                             <div class="rounded px-3 py-3 bg-blue-100 flex flex-col text-center">
-                                <span class="font-bold">
+                                <span class="font-semibold">
                                     Brand
                                 </span>
                                 <span>
                                     {{ $product->brand->name }}
                                 </span>
                             </div>
+                            <div class="rounded px-3 py-3 bg-blue-100 flex flex-col text-center">
+                                <span class="font-semibold">
+                                    Color
+                                </span>
+                                <span>
+                                    {{ $sku->color }}
+                                </span>
+                            </div>
                             @if($sku->attributeOptions->count() !== 0)
                                 @foreach($sku->attributeOptions as $attributeOption)
-                                    @if ($loop->iteration === 5) @break @endif
+                                    @if ($loop->iteration === 4) @break @endif
                                     <div class="rounded px-3 py-3 bg-blue-100 flex flex-col text-center">
-                                        <span class="font-bold">
+                                        <span class="font-semibold">
                                             {{ $attributeOption->attribute->name }}
                                         </span>
                                         <span>
@@ -129,32 +137,32 @@
                     <hr class="my-2">
 
                     <div>
-                        <span class="text-sm font-bold">
+                        <span class="font-bold">
                             General specifications
                         </span>
-                        <ul class="text-sm">
+                        <ul class="text-sm mt-2">
                             <li>
-                                <span class="font-bold">Weight: </span>
+                                <span class="font-medium">Weight: </span>
                                 <span>{{ $sku->weight }} g</span>
                             </li>
                             <li>
-                                <span class="font-bold">Height: </span>
+                                <span class="font-medium">Height: </span>
                                 <span>{{ $sku->height }} cm</span>
                             </li>
                             <li>
-                                <span class="font-bold">Width: </span>
+                                <span class="font-medium">Width: </span>
                                 <span>{{ $sku->width }} cm</span>
                             </li>
                             <li>
-                                <span class="font-bold">Thickness: </span>
+                                <span class="font-medium">Thickness: </span>
                                 <span>{{ $sku->thickness }} cm</span>
                             </li>
                             <li>
-                                <span class="font-bold">Material: </span>
+                                <span class="font-medium">Material: </span>
                                 <span>{{ $product->material }}</span>
                             </li>
                             <li>
-                                <span class="font-bold">Manufacturer: </span>
+                                <span class="font-medium">Manufacturer: </span>
                                 <span>{{ $product->manufacturer }}</span>
                             </li>
                         </ul>
@@ -198,14 +206,14 @@
                     <div class="flex flex-col gap-1">
                         <div class="text-sm">
                             <span>See more products from</span>
-                            <a href="" class="text-gray-500 underline">
+                            <a href="/brands/{{$product->brand->slug}}" class="text-gray-500 underline">
                                 {{ $product->brand->name }}
                             </a>
                         </div>
 
                         <div class="text-sm">
                             <span>See more products from</span>
-                            <a href="" class="text-gray-500 underline">
+                            <a href="/users/{{$product->seller->username}}" class="text-gray-500 underline">
                                 {{ $product->seller->fullName() }}
                             </a>
                         </div>
@@ -254,6 +262,46 @@
             </div>
         </div>
     </div>
+
+    <div class="flex flex-col p-6 gap-1 bg-gray-100 rounded">
+        <span class="font-bold">Product description</span>
+        <span class="text-[15px]">{{ $product->description }}</span>
+    </div>
+
+    @if($product->skus()->count() > 1)
+        <div class="flex flex-col">
+            <span class="font-medium text-lg mt-8 mb-4">Items of this products</span>
+            <div class="flex w-fit space-x-5 text-sm">
+                @foreach($product->skus as $otherSku)
+                    @if($otherSku->code !== $sku->code)
+                        <a href="/products/{{$otherSku->product->slug}}/{{$otherSku->code}}" class="flex flex-col border border-gray-300 rounded p-5 gap-2 hover:opacity-60">
+                            <img src="{{ $otherSku->images->first()->url }}" class="w-[250px] h-[250px]">
+                            <div class="flex justify-between">
+                                <div class="flex gap-1">
+                                    <span class="font-medium">Color:</span>
+                                    <span>{{ $otherSku->color }}</span>
+                                </div>
+                                <div class="flex gap-1">
+                                    <span class="font-medium">Price:</span>
+                                    <span>${{ $otherSku->price }}</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between">
+                                <div class="flex gap-1">
+                                    <span class="font-medium">Width:</span>
+                                    <span>{{ $otherSku->width }}</span>
+                                </div>
+                                <div class="flex gap-1">
+                                    <span class="font-medium">Height:</span>
+                                    <span>{{ $otherSku->height }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    @endif
 
     <x-products.show.reviews :$sku />
 </div>

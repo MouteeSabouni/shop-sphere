@@ -41,13 +41,15 @@
                     <span class="pl-5 text-blue-700">(e.g., Electronics, iPhone 15, mobile phones, clothes, etc.)</span>
                 </div>
 
+                @error('photos.*') <span class="error">{{ $message }}</span> @enderror
+
                 @if ($errors->any())
-                <div class="alert alert-danger text-sm text-red-600 font-medium">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </div>
-            @endif
+                    <div class="alert alert-danger text-sm text-red-600 font-medium">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
             <form class="w-3/5 mx-auto py-10 border rounded-xl px-10" action="/become-seller" method="POST">

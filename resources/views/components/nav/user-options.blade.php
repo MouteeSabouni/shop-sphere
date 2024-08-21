@@ -31,6 +31,17 @@
                 </a>
             </x-menu.item>
 
+            @if(auth()->user()->is_seller === 1 && auth()->user()->products()->count() > 0)
+                <x-menu.item>
+                    <a wire:navigate.hover href="/user/products" class="flex items-center gap-1 py-2 px-3 text-sm w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="white" stroke="black" stroke-width="0.7">
+                            <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
+                        </svg>
+                        <span class="text-sm">My Products</span>
+                    </a>
+                </x-menu.item>
+           @endif
+
             <x-menu.item>
                 <a wire:navigate.hover href="/user/favorite" class="flex items-center gap-1 py-2 px-3 text-sm w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="size-5">

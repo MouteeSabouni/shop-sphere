@@ -11,11 +11,10 @@ use App\Livewire\User\Favorite;
 use App\Livewire\Products\Newest;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Products\IndexByUser;
+use App\Livewire\User\Products\AddSku;
 use App\Livewire\User\Addresses\Update;
 use App\Livewire\Products\IndexByBrand;
 use App\Livewire\Products\IndexByCategory;
-use App\Http\Controllers\SearchController;
-use App\Http\Middleware\EnsureUserIsSeller;
 use App\Livewire\Products\Show as ProductsShow;
 use App\Livewire\User\Orders\Show as OrdersShow;
 use App\Http\Controllers\BecomeSellerController;
@@ -23,6 +22,8 @@ use App\Livewire\Products\Index as ProductsIndex;
 use App\Livewire\User\Orders\Index as OrdersIndex;
 use App\Livewire\Products\Create as CreateProduct;
 use App\Livewire\User\Addresses\Create as CreateAddress;
+use App\Livewire\User\Products\Show as UserProductsShow;
+use App\Livewire\User\Products\Index as UserProductsIndex;
 
 Route::get('/', Home::class)->name('home');
 
@@ -54,6 +55,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/addresses', CreateAddress::class)->name('user.addresses');
     Route::get('/user/addresses/{address:id}', Update::class)->name('user.addresses.update');
+
+    Route::get('/user/products', UserProductsIndex::class)->name('user.products.index')->middleware('seller');
+    Route::get('/user/products/{product:slug}', UserProductsShow::class)->name('user.products.show')->middleware('seller');
+    Route::get('/user/products/add-sub-products/{product:slug}', AddSku::class)->name('user.products.add-skus')->middleware('seller');
 
     Route::get('/products/create', CreateProduct::class)->name('products.create')->middleware('seller');
 });

@@ -20,6 +20,17 @@ trait Filterable
             })->simplePaginate(12);
     }
 
+    public function getLatestSkus($skusIds)
+    {
+        return Sku::with([
+            'favoritedBy', 'cartedBy', 'images', 'product.seller', 'product.brand', 'product.categories'
+            ])->withSum('reviews', 'rating')
+            ->withCount('reviews')
+            ->whereIn('id', $skusIds)->tap(function ($query) {
+                $this->filter->apply($query);
+            })->latest()->simplePaginate(12);
+    }
+
     public function clearFilter()
     {
         $this->filter->clear();

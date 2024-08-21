@@ -10,11 +10,11 @@ class Attribute extends Model
 {
     use HasFactory;
 
-    protected $fiilable = [
+    protected $fillable = [
         'name',
     ];
 
-    public function attributeOptions(): HasMany
+    public function options(): HasMany
     {
         return $this->hasMany(AttributeOption::class);
     }

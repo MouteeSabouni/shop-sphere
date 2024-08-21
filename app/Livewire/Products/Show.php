@@ -38,6 +38,7 @@ use Cartable, Scrollable, Favoritable;
     {
         $this->mainImage = $this->sku->images->first()->url;
         $this->images  = $this->sku->images;
+        $this->sku = Sku::whereId($this->sku->id)->withSum('reviews', 'rating')->withCount('reviews')->first();
     }
 
     public function rateProduct($rating)

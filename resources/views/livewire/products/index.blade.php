@@ -19,21 +19,22 @@
             </div>
         </div>
     @else
-    <div class="flex gap-4">
-        <div class="w-1/5">
-            <x-products.index.filter />
-        </div>
-
-
-            <div class="flex gap-6 grid grid-cols-3 w-4/5 py-6">
-                @foreach($skus as $sku)
-                    <x-products.index.card wire:key="{{$sku->id}}" :product="$sku->product" :$sku />
-                @endforeach
+        <div class="flex gap-4">
+            <div class="w-1/5">
+                <x-products.index.filter />
             </div>
-        </div>
 
-        <div>
-            {{ $skus->links() }}
+            <div class="w-4/5 py-6">
+                <div class="grid grid-cols-3 gap-6">
+                    @foreach($skus as $sku)
+                        <x-products.index.card wire:key="{{$sku->id}}" :product="$sku->product" :$sku />
+                    @endforeach
+                </div>
+
+                <div class="w-[29%] mx-auto">
+                    {{ $skus->links() }}
+                </div>
+            </div>
         </div>
     @endif
 </div>

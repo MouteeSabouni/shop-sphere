@@ -8,9 +8,9 @@ trait Cartable
     public function addToCart($skuId, $itemsToAdd = 1)
     {
         $user = auth()->user();
-        $cartItem = $user->cart()->where('sku_id', $skuId)->first();
+        $cartItem = $user->cart()->with('sku')->where('sku_id', $skuId)->first();
 
-        if ($cartItem) {
+    if ($cartItem && $cartItem->quantity + $itemsToAdd <= $cartItem->sku->quantity) {
             $cartItem->quantity += $itemsToAdd;
             $cartItem->save();
         } else {

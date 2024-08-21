@@ -30,7 +30,7 @@
                     <div class="relative z-0 w-full">
                         <input type="text" wire:model="user_name" name="user_name" placeholder=" " required
                             @class([
-                                'block py-2 px-2 w-full rounded-xl text-sm text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                'block py-2 px-2 w-full rounded-lg text-sm text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
                                 'border border-gray-300' => $errors->missing('user_name'),
                                 'border border-red-600' => $errors->has('user_name'),
                             ])
@@ -46,7 +46,7 @@
                     <div class="relative z-0 w-full">
                         <input type="email" wire:model="email" name="email" placeholder=" " required
                             @class([
-                                'block py-2 px-2 w-full rounded-xl text-sm text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                'block py-2 px-2 w-full rounded-lg text-sm text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
                                 'border border-gray-300' => $errors->missing('email'),
                                 'border border-red-600' => $errors->has('email'),
                             ])
@@ -62,13 +62,13 @@
                 <div class="relative z-0 w-full">
                     <textarea type="message" wire:model="message" name="message" rows="6" placeholder=" " required
                         @class([
-                            'block py-2 px-2 w-full resize-none no-scrollbar rounded-xl text-sm text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                            'block py-2 px-2 w-full resize-none no-scrollbar rounded-lg text-sm text-gray-900 bg-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
                             'border border-gray-300' => $errors->missing('message'),
                             'border border-red-600' => $errors->has('message'),
                         ])
                     >
                     </textarea>
-                    <label for="message" class=" text-[15px] peer-focus:font-medium absolute left-2 {{ $errors->has('message') ? 'text-red-600 font-medium' : 'text-gray-500' }} duration-300 transform -translate-y-7 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[108px]">
+                    <label for="message" class=" text-[15px] peer-focus:font-medium absolute left-2 {{ $errors->has('message') ? 'text-red-600 font-medium' : 'text-gray-500' }} duration-300 transform -translate-y-7 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-32">
                         Your message
                     </label>
                     @error('message')

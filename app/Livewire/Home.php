@@ -103,7 +103,7 @@ class Home extends Component
         ->withCount('reviews')
         ->get()
         ->sortByDesc(function ($sku) {
-            return $sku->reviews_sum_rating/$sku->reviews_count;
+            return $sku->reviews_count > 0 ? $sku->reviews_sum_rating/$sku->reviews_count : 0 ;
         });
 
         return view('livewire.home', ['title' => 'ShopSphere — Home']);

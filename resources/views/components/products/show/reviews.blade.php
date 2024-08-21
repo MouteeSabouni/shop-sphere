@@ -1,5 +1,5 @@
 @if($sku->isRated())
-    <div class="flex flex-col w-full gap-2" id="reviews">
+    <div class="flex flex-col w-full gap-1 mt-4" id="reviews">
         <span class="font-bold">
             Reviews
         </span>
