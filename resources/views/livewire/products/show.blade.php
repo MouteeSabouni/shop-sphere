@@ -64,7 +64,6 @@
                             </svg>
                         </div>
                     </div>
-
                     @if($sku->status === 0)
                         <div class="text-red-700 font-bold px-2 py-1 rounded-xl bg-red-100 w-fit">OUT OF STOCK</div>
                     @endif
@@ -270,7 +269,7 @@
 
     @if($product->skus()->count() > 1)
         <div class="flex flex-col">
-            <span class="font-medium text-lg mt-8 mb-4">Items of this products</span>
+            <span class="font-medium text-lg mt-8 mb-4">Items of this product</span>
             <div class="flex w-fit space-x-5 text-sm">
                 @foreach($product->skus as $otherSku)
                     @if($otherSku->code !== $sku->code)
