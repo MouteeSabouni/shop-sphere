@@ -7,9 +7,9 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-6 opacity-80">
+    <div class="flex flex-col flex-wrap h-[425px] gap-6">
         @foreach($testimonies as $testimony)
-            <div class="text-sm leading-6 p-4 leading-none rounded-lg bg-white flex flex-col justify-between">
+            <div class="text-sm p-4 w-[32%] leading-none rounded-lg bg-white flex flex-col justify-between">
                 <div class="flex flex-col items-center">
                     <h3 class="italic text-lg font-semibold text-gray-600">{{$testimony->user->first_name}}</h3>
                     <p class="italic text-gray-500">{{$testimony->user_title}}</p>
