@@ -38,7 +38,6 @@ use Cartable, Scrollable, Favoritable;
     {
         $this->mainImage = $this->sku->images->first()->url;
         $this->images  = $this->sku->images;
-        $this->sku = Sku::whereId($this->sku->id)->withSum('reviews', 'rating')->withCount('reviews')->first();
     }
 
     public function rateProduct($rating)
@@ -56,7 +55,6 @@ use Cartable, Scrollable, Favoritable;
             'sku_id' => $this->sku->id,
         ]);
 
-
         $this->reviewSubmitted = true;
     }
 
@@ -67,6 +65,8 @@ use Cartable, Scrollable, Favoritable;
 
     public function render()
     {
+        $this->sku = $this->sku->whereId($this->sku->id)->withSum('reviews', 'rating')->withCount('reviews')->first();
+
         return view('livewire.products.show');
     }
 }

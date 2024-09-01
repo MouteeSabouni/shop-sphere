@@ -1,4 +1,4 @@
-@if($sku->isRated())
+@if($sku->reviews()->exists())
     <div class="flex flex-col w-full gap-1 mt-4" id="reviews">
         <span class="font-bold">
             Reviews
