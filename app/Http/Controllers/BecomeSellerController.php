@@ -8,7 +8,7 @@ class BecomeSellerController extends Controller
 {
     public function show()
     {
-        return view('become-seller');
+        return auth()->user()->is_seller ? redirect('/products/create') : view('become-seller');
     }
 
     public function store(Request $request)
