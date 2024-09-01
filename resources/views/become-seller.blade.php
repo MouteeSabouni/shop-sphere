@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="relative z-0 w-full mb-5 mt-2">
-                        <input type="text" value="{{old('business_name')}}" name="business_name" placeholder=" " required
+                        <input type="text" value="{{old('business_name')}}" name="business_name" placeholder=" "
                         @class([
                             'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
                             'border-b-[0.01rem] border-gray-300' => $errors->missing('business_name'),
@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="relative z-0 w-full mb-7">
-                    <input type="text" value="{{old('social_links')}}" name="social_links" placeholder=" " required
+                    <input type="text" value="{{old('social_links')}}" name="social_links" placeholder=" "
                     @class([
                         'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
                         'border-b-[0.01rem] border-gray-300' => $errors->missing('social_links'),
