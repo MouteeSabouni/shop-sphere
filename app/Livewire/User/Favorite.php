@@ -13,7 +13,11 @@ class Favorite extends Component
     public function render()
     {
         return view('livewire.user.favorite', [
-            'skus' => auth()->user()->favoriteProducts()->with(['images', 'product', 'cartedBy'])->get(),
+            'skus' => auth()->user()->favoriteProducts()
+                ->with(['images', 'product', 'cartedBy'])
+                ->withSum('reviews', 'rating')
+                ->withCount('reviews')
+                ->get(),
             'title' => 'ShopSphere — Favorite'
         ]);
     }
