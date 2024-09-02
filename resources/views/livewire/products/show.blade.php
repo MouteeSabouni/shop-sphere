@@ -36,7 +36,7 @@
                             'bg-white border border-gray-300 rounded-full p-2 shadow',
                             'opacity-20 cursor-not-allowed' => $currentIndex+$visibleCount === $images->count()
                         ])
-                        {{ $currentIndex+$visibleCount === $images->count() ? 'disabled' : ''}}
+                        {{ $currentIndex+$visibleCount >= $images->count() ? 'disabled' : ''}}
                         >
                             <img src="/images/chevron-right.svg" class="h-6 w-6" />
                         </button>
