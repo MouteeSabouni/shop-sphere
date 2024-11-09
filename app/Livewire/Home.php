@@ -99,6 +99,7 @@ class Home extends Component
         ->get();
 
         $this->topRatedSkus = Sku::with(['reviews', 'product', 'images'])
+        ->whereHas('reviews')
         ->withSum('reviews', 'rating')
         ->withCount('reviews')
         ->get()
